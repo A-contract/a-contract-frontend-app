@@ -1,0 +1,83 @@
+export default {
+  Landing: {
+    Footer: {
+      Navigation: {
+        title: "Navigation",
+        color: "secondary.dark",
+        section1: {
+          name: "Analyse contract",
+          href: "#analyse-contract",
+          target: "",
+          color: "secondary.main",
+          pt: "0",
+          pb: "0",
+        },
+        section2: {
+          name: "Tariffs",
+          href: "#tariffs",
+          target: "",
+          color: "secondary.main",
+          pt: "0",
+          pb: "0",
+        },
+        section3: {
+          name: "Support",
+          href: "#support",
+          target: "",
+          color: "secondary.main",
+          pt: "0",
+          pb: "20px",
+        },
+      },
+      Legal: {
+        title: "Legal",
+        section1: {
+          name: "Terms & Conditions",
+          href: "/legal/terms-and-conditions",
+          target: "_blank",
+          color: "secondary.main",
+          pt: "0",
+          pb: "0",
+        },
+        section2: {
+          name: "Privacy policy",
+          href: "/legal/privacy-policy",
+          target: "_blank",
+          color: "secondary.main",
+          pt: "0",
+          pb: "20px",
+        },
+        color: "secondary.dark",
+      },
+      Social: {
+        title: "Social",
+        section1: {
+          name: "TelegramIcon",
+          href: "https://telegram.org/",
+          target: "_blank",
+          color: "secondary.main",
+          pt: "0",
+          pb: "0",
+        },
+        section2: {
+          name: "InstagramIcon",
+          href: "https://www.instagram.com/",
+          target: "_blank",
+          color: "secondary.main",
+          pt: "0",
+          pb: "0",
+        },
+        section3: {
+          name: "LinkedInIcon",
+          href: "https://www.linkedin.com/login/",
+          target: "_blank",
+          color: "secondary.main",
+          pt: "0",
+          pb: "20px",
+        },
+        color: "secondary.dark",
+      },
+      paragraph1: "All Rights Reserved.",
+    },
+  },
+} as const;
