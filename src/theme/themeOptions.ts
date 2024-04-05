@@ -17,6 +17,11 @@ const themeOptions: ThemeOptions = {
       dark: "#efeeee",
       light: "#577C61",
     },
+    info: {
+      main: "#638D6E",
+      dark: "#efeeee",
+      light: "#577C61",
+    },
     warning: {
       main: "#d32f2f",
     },
@@ -54,6 +59,7 @@ const themeOptions: ThemeOptions = {
       letterSpacing: "0.05em",
     },
   },
+  components: {},
 };
 
 export default themeOptions;

@@ -3,7 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface HeaderState {
   tabsDesktop: any[];
-  tabsMobile: any[];
   activeTabId: number;
 }
 
@@ -11,73 +10,31 @@ const initialState: HeaderState = {
   tabsDesktop: [
     {
       id: 0,
-      name: "Analyse contract",
-      href: "/#analyse-contract",
+      name: "section1.name",
+      href: "#analyse-contract",
       target: "",
       color: "secondary.light",
     },
     {
       id: 1,
-      name: "Tariffs",
-      href: "/#tariffs",
+      name: "section2.name",
+      href: "#tariffs",
       target: "",
       color: "secondary.light",
     },
     {
       id: 2,
-      name: "Support",
-      href: "/#support",
+      name: "section3.name",
+      href: "#support",
       target: "",
       color: "secondary.light",
     },
     {
       id: 3,
-      name: "Blog",
+      name: "section4.name",
       href: "/blog",
       target: "/blog",
       color: "secondary.light",
-    },
-  ],
-  tabsMobile: [
-    {
-      id: 0,
-      name: "Analyse contract",
-      href: "/#analyse-contract",
-      target: "",
-      color: "secondary.main",
-      marginTop: "",
-      borderTop: "",
-      divider: false,
-    },
-    {
-      id: 1,
-      name: "Tariffs",
-      href: "/#tariffs",
-      target: "",
-      color: "secondary.main",
-      marginTop: "",
-      borderTop: "",
-      divider: false,
-    },
-    {
-      id: 2,
-      name: "Support",
-      href: "/#support",
-      target: "",
-      color: "secondary.main",
-      marginTop: "",
-      borderTop: "",
-      divider: true,
-    },
-    {
-      id: 3,
-      name: "Blog",
-      href: "/blog",
-      target: "",
-      color: "secondary.main",
-      marginTop: "",
-      borderTop: "",
-      divider: true,
     },
   ],
   activeTabId: 0,
@@ -93,12 +50,9 @@ export const header = createSlice({
         activeTabId: action.payload,
       };
     },
-    getState: (state) => {
-      return state;
-    },
   },
 });
 
-export const { setActiveLandpageTab, getState } = header.actions;
+export const { setActiveLandpageTab } = header.actions;
 
 export default header.reducer;
