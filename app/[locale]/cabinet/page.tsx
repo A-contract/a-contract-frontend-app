@@ -1,3 +1,5 @@
-const Cabinet = () => <>Cabinet</>;
+import Cabinet from "@/components/cabinet";
 
-export default Cabinet;
+const CabinetPage = () => <Cabinet />;
+
+export default CabinetPage;
