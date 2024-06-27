@@ -6,6 +6,7 @@ import {
   Button,
   useMediaQuery,
   useTheme,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -15,78 +16,74 @@ const QuestionForm = () => {
   const scopedT = useScopedI18n("Landing.Support.QuestionForm");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
+
   return (
     <Box
       display="flex"
       justifyContent="center"
+      alignItems="flex-start"
       maxWidth={530}
-      mx={0}
-      ml={isMatch ? 0 : 0}
-      alignItems="center"
+      mx="auto"
+      mt={isMatch ? 2 : 0}
     >
       <Paper
-        component={Box}
-        height={450}
-        width={isMatch ? 350 : 400}
-        px={3}
-        py={3}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
+        sx={{
+          height: 470,
+          width: isMatch ? 350 : 400,
+          px: 3,
+          py: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <Box>
-          <Box component="h4"> {scopedT("title")}</Box>
-        </Box>
-        <Box mb={2}>
-          <TextField
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            sx={{
-              bgcolor: "secondary.main",
-              width: 320,
-            }}
-          />
-        </Box>
-        <Box mb={2}>
-          <TextField
-            placeholder={scopedT("textarea")}
-            multiline
-            rows={8}
-            variant="outlined"
-            value={question}
-            onChange={(e) => {
-              setQuestion(e.target.value);
-            }}
-            sx={{
-              bgcolor: "secondary.main",
-              width: 320,
-            }}
-          />
-        </Box>
-        <Box>
-          <Button
-            variant="outlined"
-            sx={{
-              bgcolor: "info.light",
-              color: "secondary.main",
+        <Typography component="h4" mb={2}>
+          {scopedT("title")}
+        </Typography>
+        <TextField
+          label="Email"
+          variant="outlined"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          sx={{
+            bgcolor: "secondary.main",
+            width: 320,
+            mb: 2,
+          }}
+        />
+        <TextField
+          placeholder={scopedT("textarea")}
+          multiline
+          rows={8}
+          variant="outlined"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          sx={{
+            bgcolor: "secondary.main",
+            width: 320,
+            mb: 2,
+          }}
+        />
+        <Button
+          size="medium"
+          variant="outlined"
+          sx={{
+            bgcolor: "info.light",
+            color: "secondary.main",
+            borderColor: "info.main",
+            borderRadius: 4,
+            width: 300,
+            "&:hover": {
+              bgcolor: "info.main",
               borderColor: "info.main",
-              width: 300,
-              "&:hover": {
-                bgcolor: "info.main",
-                borderColor: "info.main",
-              },
-            }}
-            // onClick={() => {
-            //   setQuestionReq();
-            // }}
-          >
-            {scopedT("button")}
-          </Button>
-        </Box>
+            },
+          }}
+          // onClick={() => {
+          //   setQuestionReq();
+          // }}
+        >
+          {scopedT("button")}
+        </Button>
       </Paper>
     </Box>
   );

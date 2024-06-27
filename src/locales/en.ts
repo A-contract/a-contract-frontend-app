@@ -49,22 +49,22 @@ export default {
       },
     },
     AnalyseContract: {
-      title: "Analyse contract",
+      title: "nalyse contract",
       paragraph1:
         "Analysis of the contract - is our service, which will provide you with the opportunity to save your time, needed to study contract.",
       paragraph2: "Service identify key clauses of contract such as:",
       paragraph3: "Qualitative and quick analysis of your contracts",
       items: {
-        point1: "Names of the parties;",
-        point2: "Subject of the contract;",
-        point3: "Payment procedure(Fees);",
-        point4: "The term of the contract;",
-        point5: "The procedure for termination of the contract;",
-        point6: "Procedure for resolving disputes;",
-        point7: "Confidentiality;",
-        point8: "The pitfalls of the contract;",
+        point1: "Names of the parties",
+        point2: "Subject of the contract",
+        point3: "Payment procedure(Fees)",
+        point4: "The term of the contract",
+        point5: "The procedure for termination of the contract",
+        point6: "Procedure for resolving disputes",
+        point7: "Confidentiality",
+        point8: "The pitfalls of the contract",
       },
-      button1: "Analyse",
+      button1: "Analyse contract",
     },
     Support: {
       title: "Support",
@@ -91,13 +91,16 @@ export default {
         },
       },
       Description: {
-        icon: "•",
+        icon1: "•",
         paragraph1:
           "The price of analysis is determined by the length of the text, i.e. number of characters.",
+        icon2: "•",
         paragraph2:
           "One analysis page contains 1800 characters, including spaces.",
+        icon3: "•",
         paragraph3:
           "The number of characters corresponds to a standard typewritten page with 30 lines of text.",
+        icon4: "•",
         paragraph4:
           "The text is printed at intervals of 1.5, each line contains 60 characters.",
       },

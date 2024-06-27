@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Header />
       <AnalyseContract />
-      <Divider />
+      <Divider sx={{ height: 2 }} />
       <Tarrifs />
       <Divider />
       <Support />

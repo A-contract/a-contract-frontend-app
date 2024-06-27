@@ -1,7 +1,7 @@
 import { useScopedI18n } from "@/locales/client";
 import { setActiveLandpageTab } from "@/store/landing/header";
 import { RootState } from "@/store/store";
-import { Tabs, Tab } from "@mui/material";
+import { Tabs, Tab, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 const HeaderTabs = (props: any) => {
@@ -12,15 +12,18 @@ const HeaderTabs = (props: any) => {
 
   return (
     <Tabs
-      orientation={props.orient}
+      orientation={props.orientation}
       textColor="secondary"
       value={activeTabId}
       onChange={(event: any, value: any) => {
         if (value < 3) dispatch(setActiveLandpageTab(value));
       }}
-      color="secondary.main"
+      color="primary.light"
+      sx={{
+        bgcolor: "primary.main",
+      }}
       TabIndicatorProps={{
-        sx: { backgroundColor: "secondary.main" },
+        sx: { backgroundColor: "primary.light" },
       }}
     >
       {tabsDesktop.map((tab: any, index: number) => (
@@ -31,6 +34,21 @@ const HeaderTabs = (props: any) => {
           sx={{ color: tab.color }}
         />
       ))}
+      <Divider sx={{ bgcolor: "primary.light", opacity: 0.2, my: 1 }} />
+      {props.orientation === "vertical" && (
+        <>
+          <Tab
+            label={"Sign In"}
+            href={"/auth"}
+            sx={{ color: "primary.light", opacity: 1 }}
+          />
+          <Tab
+            label={"Sign Up"}
+            href={"/auth"}
+            sx={{ color: "primary.light", opacity: 1 }}
+          />
+        </>
+      )}
     </Tabs>
   );
 };
