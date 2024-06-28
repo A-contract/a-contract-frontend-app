@@ -1,55 +1,97 @@
 import { useScopedI18n } from "@/locales/client";
 import { setActiveLandpageTab } from "@/store/landing/header";
 import { RootState } from "@/store/store";
-import { Tabs, Tab, Divider } from "@mui/material";
+import {
+  Tabs,
+  Tab,
+  Box,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
-const HeaderTabs = (props: any) => {
+interface HeaderTabsProps {
+  orientation: "horizontal" | "vertical";
+}
+
+const HeaderTabs: React.FC<HeaderTabsProps> = (props) => {
   const scopedT = useScopedI18n("Landing.Header.Tabs");
   const selectTabsData = (state: RootState) => state.landingHeader;
   const { tabsDesktop, activeTabId } = useSelector(selectTabsData);
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-  return (
-    <Tabs
-      orientation={props.orientation}
-      textColor="secondary"
-      value={activeTabId}
-      onChange={(event: any, value: any) => {
-        if (value < 3) dispatch(setActiveLandpageTab(value));
+  const mainTabs = tabsDesktop.map((tab: any, index: number) => (
+    <Tab
+      key={index}
+      label={scopedT(tab.name)}
+      href={tab.href}
+      onClick={() => {
+        dispatch(setActiveLandpageTab(index));
       }}
-      color="primary.light"
       sx={{
-        bgcolor: "primary.main",
+        color: tab.color,
+        ml: isMatch ? 1 : 0,
+        "&.Mui-selected": {
+          color: "primary.light",
+        },
       }}
-      TabIndicatorProps={{
-        sx: { backgroundColor: "primary.light" },
-      }}
-    >
-      {tabsDesktop.map((tab: any, index: number) => (
-        <Tab
-          key={index}
-          label={scopedT(tab.name)}
-          href={tab.href}
-          sx={{ color: tab.color }}
-        />
-      ))}
-      <Divider sx={{ bgcolor: "primary.light", opacity: 0.2, my: 1 }} />
-      {props.orientation === "vertical" && (
-        <>
+    />
+  ));
+
+  const additionalTabs =
+    props.orientation === "vertical"
+      ? [
           <Tab
+            key="signIn"
             label={"Sign In"}
             href={"/auth"}
-            sx={{ color: "primary.light", opacity: 1 }}
-          />
+            sx={{
+              color: "primary.light",
+              borderTop: "1px solid",
+              borderColor: "#ffffff4a",
+
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "primary.light",
+              },
+            }}
+          />,
           <Tab
+            key="signUp"
             label={"Sign Up"}
             href={"/auth"}
-            sx={{ color: "primary.light", opacity: 1 }}
-          />
-        </>
-      )}
-    </Tabs>
+            sx={{
+              color: "primary.light",
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "primary.light",
+              },
+            }}
+          />,
+        ]
+      : [];
+
+  return (
+    <Box>
+      <Tabs
+        orientation={props.orientation}
+        value={activeTabId}
+        onChange={(event: React.SyntheticEvent, value: number) => {
+          if (value < 3) dispatch(setActiveLandpageTab(value));
+        }}
+        sx={{
+          bgcolor: "primary.dark",
+        }}
+        TabIndicatorProps={{
+          sx: { backgroundColor: "primary.light" },
+        }}
+      >
+        {[...mainTabs, ...additionalTabs]}
+      </Tabs>
+    </Box>
   );
 };
 

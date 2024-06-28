@@ -10,6 +10,7 @@ const SupportSection = () => {
   return (
     <Box
       id={"support"}
+      className={"sections"}
       display="flex"
       flexDirection={isMatch ? "column" : "row"}
       justifyContent="center"

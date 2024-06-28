@@ -9,6 +9,7 @@ const AnalyseContract = () => {
     <>
       <Box
         id={"analyse-contract"}
+        className={"sections"}
         pt={16}
         pb={10}
         sx={{ backgroundColor: "primary.light", opacity: "20" }}

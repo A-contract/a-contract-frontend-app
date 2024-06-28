@@ -16,12 +16,18 @@ import Link from "next/link";
 import { useScopedI18n } from "@/locales/client";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const scopedT = useScopedI18n("Landing.Footer");
   const { navigation } = useSelector((state: RootState) => state.landingFooter);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const getIcon = (name: string) => {
     switch (name) {
@@ -40,7 +46,12 @@ const Footer = () => {
     const icon = getIcon(name);
     if (icon) {
       return (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           {icon}
           <Box sx={{ px: 2 }}>{name.replace("Icon", "")}</Box>
         </Box>
@@ -48,6 +59,10 @@ const Footer = () => {
     }
     return scopedT(name);
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Box
@@ -111,7 +126,7 @@ const Footer = () => {
                 mb={isMatch ? 2 : 0}
               >
                 <List>
-                  <ListItem>
+                  <ListItem key={`${value.title}-${index}`}>
                     <ListItemText
                       primary={
                         <Typography
@@ -133,9 +148,9 @@ const Footer = () => {
                     >
                       <ListItemText
                         primary={
-                          <Typography color={"secondary.main"}>
+                          <Box sx={{ color: "secondary.main" }}>
                             {nameNav(valueItem.name)}
-                          </Typography>
+                          </Box>
                         }
                       />
                     </ListItem>
