@@ -37,6 +37,7 @@ const ScrollHandler: React.FC = () => {
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;
