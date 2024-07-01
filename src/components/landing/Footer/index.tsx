@@ -100,7 +100,7 @@ const Footer = () => {
           >
             <Box
               component="img"
-              src={"static/images/logo.png"}
+              src={"/static/images/logo.png"}
               alt="logo"
               width="160px"
               mb={2}
