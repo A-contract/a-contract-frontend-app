@@ -1,6 +1,8 @@
-import Footer from "@/components/landing/Footer";
-import Header from "@/components/landing/Header";
+import Legal from "@/components/legal";
+import React from "react";
 
-const Legal = () => <></>;
+const LegalPage = () => {
+  return <Legal />;
+};
 
-export default Legal;
+export default LegalPage;
