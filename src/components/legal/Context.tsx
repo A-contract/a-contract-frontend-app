@@ -1,9 +1,9 @@
 "use client";
 import { createContext, useState } from "react";
 
-interface LegalContextValue {
-  expanded: string | false; // State for the expanded accordion panel
-  setExpanded: (panel: string) => void; // Function to update expanded state
+export interface LegalContextValue {
+  tab: number; // State for the expanded accordion panel
+  setTab: (tab: number) => void; // Function to update expanded state
 }
 
 export const LegalContext = createContext<LegalContextValue | undefined>(
@@ -11,9 +11,9 @@ export const LegalContext = createContext<LegalContextValue | undefined>(
 );
 
 const Context = (props: any) => {
-  const [expanded, setExpanded] = useState<string | false>("panel1");
+  const [tab, setTab] = useState<number>(0);
 
-  const value = { expanded, setExpanded };
+  const value = { tab, setTab };
   return (
     <LegalContext.Provider value={value}>
       {props.children}

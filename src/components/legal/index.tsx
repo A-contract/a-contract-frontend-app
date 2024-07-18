@@ -12,16 +12,37 @@ import {
   Typography,
 } from "@mui/material";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import TermsAndConditions from "./TermsAndConditions";
 import SideBar from "./SideBar";
-import { LegalContext } from "./Context";
+import { LegalContext, LegalContextValue } from "./Context";
 import PrivacyPolicy from "./PrivacyPolicy";
+import { usePathname } from "next/navigation";
 
 const drawerWidth = 240;
 
 const Legal = () => {
   const data = useContext(LegalContext);
+  const route = usePathname();
+  const splitRoute = route.split("/");
+  const typeLegacy = splitRoute[splitRoute.length - 1];
+
+  useEffect(() => {
+    if (data) {
+      switch (typeLegacy) {
+        case "terms-of-use":
+          data?.setTab(0);
+          break;
+        case "privacy-policy":
+          data?.setTab(1);
+          break;
+        default:
+          break;
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -52,11 +73,8 @@ const Legal = () => {
         }}
       >
         <Toolbar />
-        {data?.expanded === "panel1" ? (
-          <TermsAndConditions />
-        ) : (
-          <PrivacyPolicy />
-        )}
+        {data?.tab === 0 && <TermsAndConditions />}
+        {data?.tab === 1 && <PrivacyPolicy />}
       </Box>
     </Box>
   );

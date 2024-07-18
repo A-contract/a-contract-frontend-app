@@ -93,7 +93,9 @@ const PrivacyPolicy = () => {
       <Typography variant="h6" sx={{ fontWeight: "bold" }} paragraph>
         Збір та використання Ваших персональних даних
       </Typography>
-      <Typography paragraph>Типи даних, що збираються:</Typography>
+      <Typography sx={{ fontWeight: "bold" }} paragraph>
+        Типи даних, що збираються:
+      </Typography>
       <Typography sx={{ fontWeight: "bold" }} paragraph>
         Персональні дані
       </Typography>

@@ -1,25 +1,10 @@
-import {
-  Drawer,
-  Toolbar,
-  Box,
-  Divider,
-  Accordion,
-  AccordionSummary,
-  Typography,
-  AccordionDetails,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Drawer, Toolbar, Box, Divider, Tabs, Tab } from "@mui/material";
 import { useContext } from "react";
 import { LegalContext } from "../Context";
+import Link from "next/link";
 
 const SideBar = (props: { drawerWidth: number }) => {
   const data = useContext(LegalContext);
-
-  console.log(data);
-
-  const handleChange = (panel: string) => (event: React.SyntheticEvent) => {
-    data?.setExpanded(panel);
-  };
 
   return (
     <>
@@ -44,49 +29,19 @@ const SideBar = (props: { drawerWidth: number }) => {
             width={160}
           />
         </Toolbar>
-        <Divider />
-        <Accordion
-          expanded={data?.expanded === "panel1"}
-          onChange={handleChange("panel1")}
-        >
-          <AccordionSummary
-            aria-controls="panel1d-content"
-            id="panel1d-header"
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>Умови використання</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={data?.expanded === "panel2"}
-          onChange={handleChange("panel2")}
-        >
-          <AccordionSummary
-            aria-controls="panel2d-content"
-            id="panel2d-header"
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>Політика конфіденційності</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        <Divider sx={{ mt: 2 }} />
+        <Tabs orientation="vertical" value={data?.tab}>
+          <Tab
+            component={Link}
+            label="Умови використання"
+            href="/legal/terms-of-use"
+          />
+          <Tab
+            component={Link}
+            label="Політика конфіденційності"
+            href="/legal/privacy-policy"
+          />
+        </Tabs>
       </Drawer>
     </>
   );
