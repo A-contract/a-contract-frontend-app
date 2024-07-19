@@ -1,16 +1,12 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const PrivacyPolicy = () => {
   return (
     <>
-      <Typography
-        id="title"
-        variant="h5"
-        sx={{ fontWeight: "bold", pt: 10 }}
-        paragraph
-      >
+      <Typography id="title" variant="h5" sx={{ fontWeight: "bold" }} paragraph>
         Політика конфіденційності для сервісу «A Contract»
       </Typography>
+
       <Typography paragraph>Остання модифікація: 05 лютого 2024 р.</Typography>
       <br />
       <Typography paragraph>
