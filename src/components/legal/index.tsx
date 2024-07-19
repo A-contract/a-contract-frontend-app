@@ -19,7 +19,7 @@ import { LegalContext, LegalContextValue } from "./Context";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { usePathname } from "next/navigation";
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const Legal = () => {
   const data = useContext(LegalContext);
@@ -29,6 +29,7 @@ const Legal = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(typeLegacy);
       switch (typeLegacy) {
         case "terms-of-use":
           data?.setTab(0);
@@ -72,7 +73,6 @@ const Legal = () => {
           height: "100%",
         }}
       >
-        <Toolbar />
         {data?.tab === 0 && <TermsAndConditions />}
         {data?.tab === 1 && <PrivacyPolicy />}
       </Box>

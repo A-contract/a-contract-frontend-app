@@ -3,7 +3,12 @@ import { Typography } from "@mui/material";
 const PrivacyPolicy = () => {
   return (
     <>
-      <Typography variant="h5" sx={{ fontWeight: "bold" }} paragraph>
+      <Typography
+        id="title"
+        variant="h5"
+        sx={{ fontWeight: "bold", pt: 10 }}
+        paragraph
+      >
         Політика конфіденційності для сервісу «A Contract»
       </Typography>
       <Typography paragraph>Остання модифікація: 05 лютого 2024 р.</Typography>
@@ -17,10 +22,15 @@ const PrivacyPolicy = () => {
         використанням інформації відповідно до даної Політики конфіденційності.
       </Typography>
       <br />
-      <Typography variant="h6" sx={{ fontWeight: "bold" }} paragraph>
+      <Typography
+        id="terms-and-meaning"
+        variant="h6"
+        sx={{ fontWeight: "bold" }}
+        paragraph
+      >
         Терміни та визначення
       </Typography>
-      <Typography sx={{ fontWeight: "bold" }} paragraph>
+      <Typography id="interpretation" sx={{ fontWeight: "bold" }} paragraph>
         Інтерпретація
       </Typography>
       <Typography paragraph>
@@ -28,7 +38,7 @@ const PrivacyPolicy = () => {
         відповідно до інструкцій, наведених нижче. Їх значення та інтерпретація
         зберігаються як в однині, так і в множині.
       </Typography>
-      <Typography sx={{ fontWeight: "bold" }} paragraph>
+      <Typography id="definitions" sx={{ fontWeight: "bold" }} paragraph>
         Визначення
       </Typography>
       <Typography paragraph>

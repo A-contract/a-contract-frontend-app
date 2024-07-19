@@ -2,13 +2,14 @@
 import { createContext, useState } from "react";
 
 export interface LegalContextValue {
-  tab: number; // State for the expanded accordion panel
-  setTab: (tab: number) => void; // Function to update expanded state
+  tab: number;
+  setTab: (tab: number) => void;
 }
 
-export const LegalContext = createContext<LegalContextValue | undefined>(
-  undefined
-);
+export const LegalContext = createContext<LegalContextValue>({
+  tab: 0,
+  setTab: () => {},
+});
 
 const Context = (props: any) => {
   const [tab, setTab] = useState<number>(0);
