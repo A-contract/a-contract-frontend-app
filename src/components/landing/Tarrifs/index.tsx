@@ -5,7 +5,7 @@ import Description from "./Description";
 
 const Tarrifs = () => {
   return (
-    <Box id={"tariffs"} pt={10} pb={10}>
+    <Box id={"tariffs"} className={"sections"} pt={10} pb={10}>
       <Container>
         <Cards />
         <Description />

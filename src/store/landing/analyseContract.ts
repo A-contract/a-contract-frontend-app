@@ -6,14 +6,14 @@ export interface AnalyseContractState {
 
 const initialState: AnalyseContractState = {
   items: [
-    { icon: "•", point: "items.point1" },
-    { icon: "•", point: "items.point2" },
-    { icon: "•", point: "items.point3" },
-    { icon: "•", point: "items.point4" },
-    { icon: "•", point: "items.point5" },
-    { icon: "•", point: "items.point6" },
-    { icon: "•", point: "items.point7" },
-    { icon: "•", point: "items.point8" },
+    { icon: "BadgeIcon", point: "items.point1" },
+    { icon: "GavelIcon", point: "items.point2" },
+    { icon: "PaymentIcon", point: "items.point3" },
+    { icon: "AccessTimeIcon", point: "items.point4" },
+    { icon: "NotInterestedIcon", point: "items.point5" },
+    { icon: "Diversity3Icon", point: "items.point6" },
+    { icon: "AssuredWorkloadIcon", point: "items.point7" },
+    { icon: "PhishingIcon", point: "items.point8" },
   ],
 };
 

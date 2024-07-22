@@ -1,6 +1,6 @@
 import { useScopedI18n } from "@/locales/client";
 import { setActiveAuthForm } from "@/store/authForm/authForm";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 
@@ -26,7 +26,21 @@ const ButtonsPanel = () => {
         onClick={() => dispatch(setActiveAuthForm(1))}
         ml={1.5}
       >
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: "secondary.main",
+            color: "info.light",
+            borderColor: "info.light",
+            border: "1px solid",
+            "&:hover": {
+              bgcolor: "info.main",
+              color: "secondary.main",
+              borderColor: "info.main",
+              border: "1px solid",
+            },
+          }}
+        >
           {scopedT("button3")}
         </Button>
       </Box>

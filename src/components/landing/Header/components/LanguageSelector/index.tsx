@@ -11,8 +11,11 @@ const LanguageSelector = () => {
   const changeLocale = useChangeLocale();
 
   return (
-    <Box color="secondary.main" mx={2}>
-      <LanguageIcon />
+    <Box color="secondary.main" mx={2} sx={{ display: "flex" }}>
+      <Box sx={{ mt: "18px" }}>
+        <LanguageIcon sx={{ fontSize: 20 }} />
+      </Box>
+
       <Select
         defaultValue={currentLocale}
         label="Choose the language"

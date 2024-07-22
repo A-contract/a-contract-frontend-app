@@ -1,7 +1,9 @@
-import { Drawer, IconButton, useTheme } from "@mui/material";
+import { Box, Drawer, IconButton, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HeaderTabs from "../HeaderTabs";
 import { useState } from "react";
+import ButtonsPanel from "../ButtonsPanel";
+import LanguageSelector from "../LanguageSelector";
 
 const DrawerMenu = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -14,7 +16,7 @@ const DrawerMenu = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <HeaderTabs orientation={"verical"} />
+        <HeaderTabs orientation={"vertical"} />
       </Drawer>
       <IconButton
         sx={{ color: theme.palette.secondary.main }}

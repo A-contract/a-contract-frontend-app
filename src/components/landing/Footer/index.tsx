@@ -16,14 +16,20 @@ import Link from "next/link";
 import { useScopedI18n } from "@/locales/client";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const scopedT = useScopedI18n("Landing.Footer");
   const { navigation } = useSelector((state: RootState) => state.landingFooter);
+  const [isMounted, setIsMounted] = useState(false);
 
-  const nameNav = (name: any) => {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const getIcon = (name: string) => {
     switch (name) {
       case "TelegramIcon":
         return <TelegramIcon />;
@@ -32,9 +38,31 @@ const Footer = () => {
       case "LinkedInIcon":
         return <LinkedInIcon />;
       default:
-        return scopedT(name);
+        return null;
     }
   };
+
+  const nameNav = (name: any) => {
+    const icon = getIcon(name);
+    if (icon) {
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          {icon}
+          <Box sx={{ px: 2 }}>{name.replace("Icon", "")}</Box>
+        </Box>
+      );
+    }
+    return scopedT(name);
+  };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Box
@@ -46,29 +74,59 @@ const Footer = () => {
       width="100%"
       py="50px"
     >
-      <Box maxWidth="1300px" width="inherit">
+      <Box
+        maxWidth="1300px"
+        width="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
         <Toolbar
           component={Box}
-          display={isMatch ? "grid" : "flex"}
+          display="flex"
+          flexDirection={isMatch ? "column" : "row"}
           alignItems="center"
+          justifyContent="center"
+          width="100%"
+          px={isMatch ? 0 : 5}
+          gap={isMatch ? 2 : 60}
         >
-          <Box mr="auto">
+          <Box
+            sx={{ m: 1, textAlign: "center" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            minWidth={200}
+          >
             <Box
               component="img"
-              src={"static/images/logo.png"}
+              src={"/static/images/logo.png"}
               alt="logo"
               width="160px"
+              mb={2}
             />
             <Typography color={theme.palette.secondary.main}>
               © 2023-{new Date().getFullYear()}, A-contract.{" "}
               {scopedT("paragraph1")}
             </Typography>
           </Box>
-          <Box display={isMatch ? "grid" : "flex"}>
+          <Box
+            display="flex"
+            flexDirection={isMatch ? "column" : "row"}
+            alignItems={isMatch ? "center" : "flex-start"}
+            mt={isMatch ? 3 : 0}
+            ml={isMatch ? 0 : 5}
+            width="100%"
+          >
             {navigation.map((value, index) => (
-              <Box key={index} pl={isMatch ? "" : "30px"}>
+              <Box
+                key={index}
+                py={1}
+                width={isMatch ? "100%" : "auto"}
+                mb={isMatch ? 2 : 0}
+              >
                 <List>
-                  <ListItem>
+                  <ListItem key={`${value.title}-${index}`}>
                     <ListItemText
                       primary={
                         <Typography
@@ -79,7 +137,7 @@ const Footer = () => {
                           {scopedT(value.title)}
                         </Typography>
                       }
-                    ></ListItemText>
+                    />
                   </ListItem>
                   {value.items.map((valueItem: any, indexItem: number) => (
                     <ListItem
@@ -90,11 +148,11 @@ const Footer = () => {
                     >
                       <ListItemText
                         primary={
-                          <Typography color={"secondary.main"}>
+                          <Box sx={{ color: "secondary.main" }}>
                             {nameNav(valueItem.name)}
-                          </Typography>
+                          </Box>
                         }
-                      ></ListItemText>
+                      />
                     </ListItem>
                   ))}
                 </List>
