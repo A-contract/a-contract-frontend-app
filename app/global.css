@@ -1,18 +1,18 @@
-html {
-    background-color: #fff;
+  html {
+      background-color: #fff;
+    }
+
+  a {
+    all: unset;
+    cursor: pointer;
   }
 
-a {
-  all: unset;
-  cursor: pointer;
-}
-
-
-  
   @media (prefers-color-scheme: dark) {
     html {
       background-color: #fff;
       
     }
   }
+
+
   

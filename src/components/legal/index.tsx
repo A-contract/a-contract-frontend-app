@@ -1,80 +1,56 @@
 "use client";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  AppBar,
-  Box,
-  CssBaseline,
-  Divider,
-  Drawer,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-
-import React, { useContext, useEffect } from "react";
+import { AppBar, Box, CssBaseline, Toolbar, Typography } from "@mui/material";
+import React from "react";
 import TermsAndConditions from "./TermsAndConditions";
 import SideBar from "./SideBar";
-import { LegalContext, LegalContextValue } from "./Context";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { usePathname } from "next/navigation";
+import LanguageSelector from "../landing/Header/components/LanguageSelector";
 
 const drawerWidth = 280;
 
 const Legal = () => {
-  const data = useContext(LegalContext);
   const route = usePathname();
-  const splitRoute = route.split("/");
-  const typeLegacy = splitRoute[splitRoute.length - 1];
+  const typeLegacy = route.split("/").pop();
 
-  useEffect(() => {
-    if (data) {
-      console.log(typeLegacy);
-      switch (typeLegacy) {
-        case "terms-of-use":
-          data?.setTab(0);
-          break;
-        case "privacy-policy":
-          data?.setTab(1);
-          break;
-        default:
-          break;
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route]);
+  const currentTab = typeLegacy === "privacy-policy" ? 1 : 0;
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
-        position="fixed"
         sx={{
           width: `calc(100% - ${drawerWidth}px)`,
           ml: `${drawerWidth}px`,
           bgcolor: "primary.dark",
+          display: "flex",
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Legal
-          </Typography>
+          <Box>
+            <Typography variant="h6" noWrap component="div">
+              Legal
+            </Typography>
+          </Box>
+          <Box sx={{ ml: "auto", mr: 10 }}>
+            <LanguageSelector />
+          </Box>
         </Toolbar>
       </AppBar>
-      <SideBar drawerWidth={drawerWidth} />
+      <SideBar drawerWidth={drawerWidth} tab={currentTab} />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           bgcolor: "background.default",
           p: 3,
+          px: 7,
           borderLeft: "1px solid #0000001f",
           width: "100%",
           height: "100%",
         }}
       >
-        {data?.tab === 0 && <TermsAndConditions />}
-        {data?.tab === 1 && <PrivacyPolicy />}
+        {currentTab === 0 ? <TermsAndConditions /> : <PrivacyPolicy />}
       </Box>
     </Box>
   );
