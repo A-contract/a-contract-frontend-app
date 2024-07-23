@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { setActiveLandpageTab } from "@/store/landing/header";
@@ -9,6 +9,24 @@ const ScrollHandler: React.FC = () => {
   const { tabsDesktop } = useSelector(selectTabsData);
   const dispatch = useDispatch();
 
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          const matchedTab = tabsDesktop.find(
+            (element: any) => element.href === `#${id}`
+          );
+          if (matchedTab) {
+            dispatch(setActiveLandpageTab(matchedTab.id));
+            window.history.pushState(null, "", `#${id}`);
+          }
+        }
+      });
+    },
+    [dispatch, tabsDesktop]
+  );
+
   useEffect(() => {
     const sections = document.querySelectorAll(".sections");
     const options = {
@@ -17,28 +35,12 @@ const ScrollHandler: React.FC = () => {
       threshold: 0.5,
     };
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          dispatch(
-            setActiveLandpageTab(
-              tabsDesktop.filter((element: any) => element.href === `#${id}`)[0]
-                .id
-            )
-          );
-          window.history.pushState(null, "", `#${id}`);
-        }
-      });
-    };
-
     const observer = new IntersectionObserver(handleIntersection, options);
     sections.forEach((section) => observer.observe(section));
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleIntersection]);
 
   return null;
 };

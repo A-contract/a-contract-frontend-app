@@ -1,36 +1,33 @@
 import { useScopedI18n } from "@/locales/client";
 import { setActiveLandpageTab } from "@/store/landing/header";
 import { RootState } from "@/store/store";
-import {
-  Tabs,
-  Tab,
-  Box,
-  Divider,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Tabs, Tab, Box, useMediaQuery, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 interface HeaderTabsProps {
   orientation: "horizontal" | "vertical";
 }
 
-const HeaderTabs: React.FC<HeaderTabsProps> = (props) => {
+const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
   const scopedT = useScopedI18n("Landing.Header.Tabs");
-  const selectTabsData = (state: RootState) => state.landingHeader;
-  const { tabsDesktop, activeTabId } = useSelector(selectTabsData);
+  const { tabsDesktop, activeTabId } = useSelector(
+    (state: RootState) => state.landingHeader
+  );
   const dispatch = useDispatch();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-  const mainTabs = tabsDesktop.map((tab: any, index: number) => (
+  const handleTabClick = (index: number) => {
+    dispatch(setActiveLandpageTab(index < 3 ? index : activeTabId));
+  };
+
+  const renderTab = (tab: any, index: number) => (
     <Tab
       key={index}
       label={scopedT(tab.name)}
       href={tab.href}
-      onClick={() => {
-        dispatch(setActiveLandpageTab(index));
-      }}
+      target={tab.target}
+      onClick={() => handleTabClick(index)}
       sx={{
         color: tab.color,
         ml: isMatch ? 1 : 0,
@@ -39,49 +36,46 @@ const HeaderTabs: React.FC<HeaderTabsProps> = (props) => {
         },
       }}
     />
-  ));
+  );
 
-  const additionalTabs =
-    props.orientation === "vertical"
-      ? [
-          <Tab
-            key="signIn"
-            label={"Sign In"}
-            href={"/auth"}
-            sx={{
-              color: "primary.light",
-              borderTop: "1px solid",
-              borderColor: "#ffffff4a",
+  const mainTabs = tabsDesktop.map(renderTab);
 
-              ml: isMatch ? 1 : 0,
-              "&.Mui-selected": {
-                color: "primary.light",
-              },
-            }}
-          />,
-          <Tab
-            key="signUp"
-            label={"Sign Up"}
-            href={"/auth"}
-            sx={{
-              color: "primary.light",
-              ml: isMatch ? 1 : 0,
-              "&.Mui-selected": {
-                color: "primary.light",
-              },
-            }}
-          />,
-        ]
-      : [];
+  const additionalTabs = orientation === "vertical" && (
+    <>
+      <Tab
+        key="signIn"
+        label="Sign In"
+        href="/auth"
+        sx={{
+          color: "primary.light",
+          borderTop: "1px solid",
+          borderColor: "#ffffff4a",
+          ml: isMatch ? 1 : 0,
+          "&.Mui-selected": {
+            color: "primary.light",
+          },
+        }}
+      />
+      <Tab
+        key="signUp"
+        label="Sign Up"
+        href="/auth"
+        sx={{
+          color: "primary.light",
+          ml: isMatch ? 1 : 0,
+          "&.Mui-selected": {
+            color: "primary.light",
+          },
+        }}
+      />
+    </>
+  );
 
   return (
     <Box>
       <Tabs
-        orientation={props.orientation}
+        orientation={orientation}
         value={activeTabId}
-        onChange={(event: React.SyntheticEvent, value: number) => {
-          if (value < 3) dispatch(setActiveLandpageTab(value));
-        }}
         sx={{
           bgcolor: "primary.dark",
         }}
@@ -89,7 +83,8 @@ const HeaderTabs: React.FC<HeaderTabsProps> = (props) => {
           sx: { backgroundColor: "primary.light" },
         }}
       >
-        {[...mainTabs, ...additionalTabs]}
+        {mainTabs}
+        {additionalTabs}
       </Tabs>
     </Box>
   );

@@ -1,3 +1,5 @@
-const Auth = () => <>Auth</>;
+import Auth from "@/components/auth";
 
-export default Auth;
+const AuthPage = () => <Auth />;
+
+export default AuthPage;
