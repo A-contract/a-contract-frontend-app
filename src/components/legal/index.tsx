@@ -6,6 +6,7 @@ import SideBar from "./SideBar";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { usePathname } from "next/navigation";
 import LanguageSelector from "../landing/Header/components/LanguageSelector";
+import Header from "./Header";
 
 const drawerWidth = 280;
 
@@ -18,25 +19,8 @@ const Legal = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        sx={{
-          width: `calc(100% - ${drawerWidth}px)`,
-          ml: `${drawerWidth}px`,
-          bgcolor: "primary.dark",
-          display: "flex",
-        }}
-      >
-        <Toolbar>
-          <Box>
-            <Typography variant="h6" noWrap component="div">
-              Legal
-            </Typography>
-          </Box>
-          <Box sx={{ ml: "auto", mr: 10 }}>
-            <LanguageSelector />
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Header drawerWidth={drawerWidth} />
+
       <SideBar drawerWidth={drawerWidth} tab={currentTab} />
       <Box
         component="main"

@@ -328,4 +328,5 @@ export default {
       },
     },
   },
+  Blog: {},
 } as const;
