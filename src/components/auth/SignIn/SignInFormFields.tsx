@@ -10,7 +10,7 @@ const FormFields = () => {
 
   const handleInputChange =
     (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      authContext?.setFormData((prevData) => ({
+      authContext?.setAuthFormData((prevData) => ({
         ...prevData,
         [field]: { value: event.target.value, isValid: true },
       }));
@@ -27,9 +27,11 @@ const FormFields = () => {
           required
           placeholder="email"
           label="email"
-          error={!authContext?.formData.email.isValid}
+          error={!authContext?.authFormData.email.isValid}
           helperText={
-            !authContext?.formData.email.isValid ? "Email is not correct" : ""
+            !authContext?.authFormData.email.isValid
+              ? "Email is not correct"
+              : ""
           }
           onChange={handleInputChange("email")}
           sx={{ width: "300px" }}
@@ -42,9 +44,9 @@ const FormFields = () => {
           label="password"
           type={showPassword ? "text" : "password"}
           sx={{ width: "300px" }}
-          error={!authContext?.formData.password.isValid}
+          error={!authContext?.authFormData.password.isValid}
           helperText={
-            !authContext?.formData.password.isValid
+            !authContext?.authFormData.password.isValid
               ? "Password is not correct"
               : ""
           }

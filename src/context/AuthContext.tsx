@@ -18,9 +18,38 @@ interface AuthFormData {
   };
 }
 
+interface RegFormData {
+  email: {
+    value: string;
+    isValid: boolean;
+  };
+  password: {
+    value: string;
+    isValid: boolean;
+  };
+  confirmPassword: {
+    value: string;
+    isValid: boolean;
+  };
+  name: {
+    value: string;
+    isValid: boolean;
+  };
+  surname: {
+    value: string;
+    isValid: boolean;
+  };
+  legal: {
+    value: boolean;
+    isValid: boolean;
+  };
+}
+
 interface IAuthContextProps {
-  formData: AuthFormData;
-  setFormData: Dispatch<SetStateAction<AuthFormData>>;
+  authFormData: AuthFormData;
+  setAuthFormData: Dispatch<SetStateAction<AuthFormData>>;
+  regFormData: RegFormData;
+  setRegFormData: Dispatch<SetStateAction<RegFormData>>;
   openSnackbar: boolean;
   setOpenSnackbar: Dispatch<SetStateAction<boolean>>;
 }
@@ -29,17 +58,38 @@ export const AuthContext = createContext<IAuthContextProps | undefined>(
   undefined
 );
 
+export const defaultAuthData = {
+  email: { value: "", isValid: true },
+  password: { value: "", isValid: true },
+};
+
+export const defaultRegData = {
+  email: { value: "", isValid: true },
+  password: { value: "", isValid: true },
+  confirmPassword: { value: "", isValid: true },
+  name: { value: "", isValid: true },
+  surname: { value: "", isValid: true },
+  legal: { value: false, isValid: true },
+};
+
 const AuthContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [formData, setFormData] = useState<AuthFormData>({
-    email: { value: "", isValid: true },
-    password: { value: "", isValid: true },
-  });
+  const [authFormData, setAuthFormData] =
+    useState<AuthFormData>(defaultAuthData);
+
+  const [regFormData, setRegFormData] = useState<RegFormData>(defaultRegData);
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
 
   return (
     <AuthContext.Provider
-      value={{ formData, setFormData, openSnackbar, setOpenSnackbar }}
+      value={{
+        authFormData,
+        setAuthFormData,
+        regFormData,
+        setRegFormData,
+        openSnackbar,
+        setOpenSnackbar,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,5 +1,4 @@
 import { setActiveAuthForm } from "@/store/authForm/authForm";
-import theme from "@/theme/theme";
 import { Box, Typography, useTheme } from "@mui/material";
 import Link from "next/link";
 import { useDispatch } from "react-redux";

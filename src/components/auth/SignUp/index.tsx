@@ -1,17 +1,15 @@
 import SignUpFormFields from "./SignUpFormFields";
-import SignUpLegacy from "./SignUpLegacy";
-import SignUpSnackbar from "./SignUpSnackbar";
 import SignUpButton from "./SignUpButton";
+import AuthSnackbar from "../AuthSnackbar";
 
 const SignUp = () => {
-    return (
-        <>
-            <SignUpFormFields />
-            <SignUpLegacy />
-            <SignUpSnackbar />
-            <SignUpButton />
-        </>
-    );
+  return (
+    <>
+      <SignUpFormFields />
+      <AuthSnackbar />
+      <SignUpButton />
+    </>
+  );
 };
 
 export default SignUp;
