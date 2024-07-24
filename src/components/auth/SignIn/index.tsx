@@ -1,15 +1,15 @@
 "use client";
 import FormFields from "./SignInFormFields";
 import SignInButton from "./SignInButton";
-import SignInSnackbar from "./SignInSnackbar";
 import SignInLinks from "./SignInLinks";
+import AuthSnackbar from "../AuthSnackbar";
 
 const SignIn = () => {
   return (
     <>
       <FormFields />
       <SignInButton />
-      <SignInSnackbar />
+      <AuthSnackbar />
       <SignInLinks />
     </>
   );

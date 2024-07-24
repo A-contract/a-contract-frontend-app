@@ -1,180 +1,175 @@
+import { AuthContext } from "@/context/AuthContext";
+import theme from "@/theme/theme";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import {
-    Box,
-    TextField,
-    InputAdornment,
-    IconButton,
-    Typography,
+  Box,
+  TextField,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  FormHelperText,
 } from "@mui/material";
-import { useState } from "react";
-import {
-    isNotEmptyField,
-    isValidConfirmPassword,
-    isValidEmail,
-    isValidPassword,
-} from "./validation";
-
-interface FormErrors {
-    name: boolean;
-    surname: boolean;
-    email: boolean;
-    password: boolean;
-    passwordConfirmation: boolean;
-    terms: boolean;
-}
-
-interface FormFields {
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-    terms: boolean;
-}
+import { useContext, useState } from "react";
 
 const SignUpFormFields = () => {
-    const [showPassword, setShowPassword] = useState<boolean>(false);
+  const authContext = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
-    const [formErrors, setFormErrors] = useState<FormErrors>({
-        name: true,
-        surname: true,
-        email: true,
-        password: true,
-        passwordConfirmation: true,
-        terms: true,
-    });
+  const handleInputChange =
+    (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value =
+        field === "legal" ? event.target.checked : event.target.value;
+      const isValid = field === "legal" ? event.target.checked : true;
 
-    const [formFields, setFormFields] = useState<FormFields>({
-        name: "",
-        surname: "",
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-        terms: false,
-    });
-
-    const handleInputChange =
-        (field: keyof FormFields) =>
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            const newValue = event.target.value;
-            setFormFields({ ...formFields, [field]: newValue });
-            validateField(field, newValue);
-        };
-
-    const validateField = (
-        field: keyof FormFields,
-        value: string | boolean
-    ) => {
-        let isValid;
-        switch (field) {
-            case "email":
-                isValid = isValidEmail(value as string);
-                break;
-            case "password":
-                isValid = isValidPassword(value as string);
-                break;
-            case "passwordConfirmation":
-                isValid = isValidConfirmPassword(
-                    formFields.password,
-                    value as string
-                );
-                break;
-            case "terms":
-                isValid = value === true;
-                break;
-            default:
-                isValid = isNotEmptyField(value as string);
-        }
-        setFormErrors({ ...formErrors, [field]: isValid });
+      authContext?.setRegFormData((prevData) => ({
+        ...prevData,
+        [field]: { value: value, isValid },
+      }));
     };
 
-    const handleCheckboxChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const newValue = event.target.checked;
-        setFormFields({ ...formFields, terms: newValue });
-        setFormErrors({ ...formErrors, terms: newValue });
-    };
+  const inputs = [
+    {
+      placeholder: "name",
+      lable: "name",
+      type: "text",
+      error: !authContext?.regFormData.name?.isValid,
+      helperText: !authContext?.regFormData.name?.isValid
+        ? "Field of name is required"
+        : "",
+      autocomplete: "off",
+      InputProps: <></>,
+    },
+    {
+      placeholder: "surname",
+      lable: "surname",
+      type: "text",
+      error: !authContext?.regFormData.surname?.isValid,
+      helperText: !authContext?.regFormData.surname?.isValid
+        ? "Field of surname is required"
+        : "",
+      autocomplete: "off",
+      InputProps: <></>,
+    },
+    {
+      placeholder: "email",
+      lable: "email",
+      type: "text",
+      error: !authContext?.regFormData.email?.isValid,
+      helperText: !authContext?.regFormData.email?.isValid
+        ? "Field of email is required"
+        : "",
+      autocomplete: "off",
+      InputProps: <></>,
+    },
+    {
+      placeholder: "password",
+      lable: "password",
+      type: "password",
+      error: !authContext?.regFormData.password?.isValid,
+      helperText: !authContext?.regFormData.password?.isValid
+        ? "Password is not correct"
+        : "",
+      autocomplete: "off",
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={() => setShowPassword((prev) => !prev)}
+              onMouseDown={(e) => e.preventDefault()}
+              edge="end"
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
+    },
+    {
+      placeholder: "confirmPassword",
+      lable: "confirm password",
+      type: "password",
+      error: !authContext?.regFormData.confirmPassword?.isValid,
+      helperText: !authContext?.regFormData.confirmPassword?.isValid
+        ? "Confirm password is not correct"
+        : "",
+      autocomplete: "off",
+      InputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle confirm password visibility"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              onMouseDown={(e) => e.preventDefault()}
+              edge="end"
+            >
+              {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
+    },
+  ];
 
-    return (
-        <>
-            <Box sx={{ pb: "25px" }}>
-                <Typography sx={{ fontWeight: 600 }}>Sign up</Typography>
-            </Box>
-            {[
-                { label: "name", placeholder: "name" },
-                { label: "surname", placeholder: "surname" },
-                { label: "email", placeholder: "email", type: "email" },
-                {
-                    label: "password",
-                    placeholder: "password",
-                    type: showPassword ? "text" : "password",
-                },
-                {
-                    label: "confirm password",
-                    placeholder: "password confirmation",
-                    type: "password",
-                    field: "passwordConfirmation",
-                },
-            ].map(
-                (
-                    { label, placeholder, type = "text", field = label },
-                    index
-                ) => (
-                    <Box key={index} sx={{ pb: "10px" }}>
-                        <TextField
-                            required
-                            placeholder={placeholder}
-                            label={label}
-                            type={type}
-                            error={!formErrors[field as keyof FormErrors]}
-                            helperText={
-                                !formErrors[field as keyof FormErrors]
-                                    ? `${label} is not correct`
-                                    : ""
-                            }
-                            value={formFields[field as keyof FormFields]}
-                            autoComplete="off"
-                            onChange={handleInputChange(
-                                field as keyof FormFields
-                            )}
-                            InputProps={
-                                label === "password" ? (
-                                    {
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={() =>
-                                                        setShowPassword(
-                                                            !showPassword
-                                                        )
-                                                    }
-                                                    onMouseDown={(e) =>
-                                                        e.preventDefault()
-                                                    }
-                                                    edge="end"
-                                                >
-                                                    {showPassword ? (
-                                                        <VisibilityOff />
-                                                    ) : (
-                                                        <Visibility />
-                                                    )}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }
-                                ) : (
-                                    <></>
-                                )
-                            }
-                            sx={{ width: "300px" }}
-                        />
-                    </Box>
-                )
-            )}
-        </>
-    );
+  return (
+    <>
+      {inputs.map((element, index) => (
+        <Box key={index} sx={{ pb: "10px" }}>
+          <TextField
+            required
+            placeholder={element.placeholder}
+            label={element.lable}
+            type={element.type}
+            error={element.error}
+            helperText={element.helperText}
+            autoComplete={element.autocomplete}
+            onChange={handleInputChange(element.lable)}
+            InputProps={element.InputProps}
+            sx={{ width: "300px" }}
+          />
+        </Box>
+      ))}
+
+      <Box sx={{ pb: "10px", pl: "10px" }}>
+        <FormControl sx={{ minWidth: 120, width: 300 }} size="medium">
+          <FormControlLabel
+            control={
+              <Checkbox
+                required
+                checked={authContext?.regFormData.legal?.value || false}
+                onChange={handleInputChange("legal")}
+              />
+            }
+            label={
+              <Link
+                sx={{
+                  textAlign: "center",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  "&:hover": {
+                    color: theme.palette.info.main,
+                  },
+                }}
+                target="_blank"
+                href="/legal/terms-and-conditions"
+              >
+                By signing up, you agree to our terms of service and privacy
+                policy
+              </Link>
+            }
+          />
+          {!authContext?.regFormData.legal?.isValid && (
+            <FormHelperText error>Required field</FormHelperText>
+          )}
+        </FormControl>
+      </Box>
+    </>
+  );
 };
 
 export default SignUpFormFields;

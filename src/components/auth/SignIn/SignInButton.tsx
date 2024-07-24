@@ -2,7 +2,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { Box, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
-import { isValidEmail, isValidPassword } from "./validation";
+import { isValidEmail, isValidPassword } from "../validation";
 
 const SignInButton = () => {
   const theme = useTheme();
@@ -11,14 +11,17 @@ const SignInButton = () => {
   const handleSubmit = () => {
     if (!authContext) return;
 
-    const emailIsValid = isValidEmail(authContext.formData.email.value);
+    const emailIsValid = isValidEmail(authContext.authFormData.email.value);
     const passwordIsValid = isValidPassword(
-      authContext.formData.password.value
+      authContext.authFormData.password.value
     );
 
-    authContext.setFormData({
-      email: { ...authContext?.formData.email, isValid: emailIsValid },
-      password: { ...authContext?.formData.password, isValid: passwordIsValid },
+    authContext.setAuthFormData({
+      email: { ...authContext?.authFormData.email, isValid: emailIsValid },
+      password: {
+        ...authContext?.authFormData.password,
+        isValid: passwordIsValid,
+      },
     });
 
     if (emailIsValid && passwordIsValid) {

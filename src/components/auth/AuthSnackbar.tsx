@@ -3,7 +3,7 @@ import { AuthContext } from "@/context/AuthContext";
 import { Snackbar, Alert } from "@mui/material";
 import React, { useContext } from "react";
 
-const SignInSnackbar = () => {
+const AuthSnackbar = () => {
   const authContext = useContext(AuthContext);
   return (
     <Snackbar
@@ -12,11 +12,6 @@ const SignInSnackbar = () => {
       onClose={() => {
         authContext?.setOpenSnackbar(false);
       }}
-      sx={{
-        left: "auto !important",
-        right: "auto !important",
-        bottom: "20% !important",
-      }}
     >
       <Alert
         onClose={() => {
@@ -24,10 +19,10 @@ const SignInSnackbar = () => {
         }}
         severity="error"
       >
-        Wrong login or password
+        Wrong entred data
       </Alert>
     </Snackbar>
   );
 };
 
-export default SignInSnackbar;
+export default AuthSnackbar;

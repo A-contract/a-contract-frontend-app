@@ -9,12 +9,19 @@ import Link from "next/link";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveAuthForm } from "@/store/authForm/authForm";
+import { useContext } from "react";
+import {
+  AuthContext,
+  defaultAuthData,
+  defaultRegData,
+} from "@/context/AuthContext";
 
 const Auth = () => {
   const theme = useTheme();
   const activeFormId = useSelector(
     (state: RootState) => state.authForm.activeFormId
   );
+  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const tabs = [<SignIn key={""} />, <SignUp key={""} />];
 
@@ -67,6 +74,9 @@ const Auth = () => {
           <Tabs
             value={activeFormId}
             onChange={(e, newTabValue: any) => {
+              authContext?.setAuthFormData(defaultAuthData);
+              authContext?.setRegFormData(defaultRegData);
+              authContext?.setOpenSnackbar(false);
               dispatch(setActiveAuthForm(newTabValue));
             }}
           >
