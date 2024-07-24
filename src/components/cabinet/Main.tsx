@@ -1,42 +1,42 @@
 import { Box, useTheme } from "@mui/material";
-import Contracts from "./main/Contracts";
-import Workspace from "./main/Workspace";
-import Support from "./main/Support";
-import { useTypedSelector } from "@/hooks/useTypeSelector";
-import Settings from "./main/Settings";
+// import Contracts from "./main/Contracts";
+// import Workspace from "./main/Workspace";
+// import Support from "./main/Support";
+// import { useTypedSelector } from "@/hooks/useTypeSelector";
+// import Settings from "./main/Settings";
 
-const Main = (props: any) => {
-  const lawyerMain = [
-    <Contracts role={props.user.role} key={""} />,
-    <Workspace key={""} />,
-    <Support key={""} />,
-    <Settings
-      user={props.user}
-      setActionTrigger={props.setActionTrigger}
-      actionTrigger={props.actionTrigger}
-      key={""}
-    />,
-  ];
-  const customerMain = [
-    <Contracts role={props.user.role} key={""} />,
-    <Support key={""} />,
-    <Settings
-      user={props.user}
-      setActionTrigger={props.setActionTrigger}
-      actionTrigger={props.actionTrigger}
-      key={""}
-    />,
-  ];
+const Main = () => {
+  // const lawyerMain = [
+  //   <Contracts role={props.user.role} key={""} />,
+  //   <Workspace key={""} />,
+  //   <Support key={""} />,
+  //   <Settings
+  //     user={props.user}
+  //     setActionTrigger={props.setActionTrigger}
+  //     actionTrigger={props.actionTrigger}
+  //     key={""}
+  //   />,
+  // ];
+  // const customerMain = [
+  //   <Contracts role={props.user.role} key={""} />,
+  //   <Support key={""} />,
+  //   <Settings
+  //     user={props.user}
+  //     setActionTrigger={props.setActionTrigger}
+  //     actionTrigger={props.actionTrigger}
+  //     key={""}
+  //   />,
+  // ];
   const theme = useTheme();
-  const cabinetState = useTypedSelector((state: any) => state.cabinet);
-  const activeTab = cabinetState.activeTabId;
-  const userRole = props.user.role;
-  const main =
-    userRole === "lawyer"
-      ? lawyerMain
-      : userRole === "customer"
-      ? customerMain
-      : [];
+  //const cabinetState = useTypedSelector((state: any) => state.cabinet);
+  //const activeTab = cabinetState.activeTabId;
+  // const userRole = props.user.role;
+  // const main =
+  //   userRole === "lawyer"
+  //     ? lawyerMain
+  //     : userRole === "customer"
+  //     ? customerMain
+  //     : [];
 
   return (
     <Box
@@ -50,7 +50,7 @@ const Main = (props: any) => {
         bgcolor: theme.palette.secondary.dark,
       }}
     >
-      {main[activeTab]}
+      {/* {main[activeTab]} */}
     </Box>
   );
 };

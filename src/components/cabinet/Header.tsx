@@ -3,7 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const drawerWidth = 200;
 
-const Header = (props: any) => {
+const Header = () => {
   const theme = useTheme();
 
   return (
@@ -17,7 +17,7 @@ const Header = (props: any) => {
       }}
     >
       <Toolbar sx={{ ml: "auto" }}>
-        {props.user.name} {props.user.surname}
+        {/* {props.user.name} {props.user.surname} */}
         <AccountCircleIcon
           sx={{ fontSize: "40px", ml: 1, color: "#cbcbcb" }}
         ></AccountCircleIcon>
