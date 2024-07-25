@@ -1,16 +1,14 @@
 "use client";
+import Drawer from "./Drawer";
 import Header from "./Header";
-import Main from "./Main";
-import SideBar from "./SideBar";
 
-const CabinetPage = () => {
+const Cabinet = () => {
   return (
     <>
       <Header />
-      <Main />
-      <SideBar />
+      <Drawer />
     </>
   );
 };
 
-export default CabinetPage;
+export default Cabinet;

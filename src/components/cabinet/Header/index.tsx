@@ -17,7 +17,6 @@ const Header = () => {
       }}
     >
       <Toolbar sx={{ ml: "auto" }}>
-        {/* {props.user.name} {props.user.surname} */}
         <AccountCircleIcon
           sx={{ fontSize: "40px", ml: 1, color: "#cbcbcb" }}
         ></AccountCircleIcon>

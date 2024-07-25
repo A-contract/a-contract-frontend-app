@@ -1,11 +1,10 @@
 "use client";
-import { AppBar, Box, CssBaseline, Toolbar, Typography } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import React from "react";
 import TermsAndConditions from "./TermsAndConditions";
-import SideBar from "./SideBar";
+import SideBar from "./Drawer";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { usePathname } from "next/navigation";
-import LanguageSelector from "../landing/Header/components/LanguageSelector";
 import Header from "./Header";
 
 const drawerWidth = 280;
