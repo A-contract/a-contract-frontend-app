@@ -37,7 +37,7 @@ const SignInButton = () => {
         onClick={handleSubmit}
         sx={{
           bgcolor: theme.palette.info.light,
-          color: "primary.light",
+          color: "secondary.main",
           borderColor: theme.palette.info.main,
           width: "300px",
           "&:hover": {

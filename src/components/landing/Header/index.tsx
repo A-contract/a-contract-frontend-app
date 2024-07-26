@@ -13,7 +13,7 @@ const Header = () => {
     <AppBar
       component="header"
       color="primary"
-      sx={{ bgcolor: "primary.dark", alignItems: "center" }}
+      sx={{ bgcolor: "primary.main", alignItems: "center" }}
     >
       <Box maxWidth={1300} width="100%">
         <Toolbar>

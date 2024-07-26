@@ -32,7 +32,7 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         color: tab.color,
         ml: isMatch ? 1 : 0,
         "&.Mui-selected": {
-          color: "primary.light",
+          color: "secondary.main",
         },
       }}
     />
@@ -47,12 +47,12 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         label="Sign In"
         href="/auth"
         sx={{
-          color: "primary.light",
+          color: "secondary.main",
           borderTop: "1px solid",
           borderColor: "#ffffff4a",
           ml: isMatch ? 1 : 0,
           "&.Mui-selected": {
-            color: "primary.light",
+            color: "secondary.main",
           },
         }}
       />
@@ -61,10 +61,10 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         label="Sign Up"
         href="/auth"
         sx={{
-          color: "primary.light",
+          color: "secondary.main",
           ml: isMatch ? 1 : 0,
           "&.Mui-selected": {
-            color: "primary.light",
+            color: "secondary.main",
           },
         }}
       />
@@ -77,10 +77,10 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         orientation={orientation}
         value={activeTabId}
         sx={{
-          bgcolor: "primary.dark",
+          bgcolor: "primary.main",
         }}
         TabIndicatorProps={{
-          sx: { backgroundColor: "primary.light" },
+          sx: { backgroundColor: "secondary.main" },
         }}
       >
         {mainTabs}

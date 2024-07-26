@@ -7,42 +7,21 @@ import React, {
   SetStateAction,
 } from "react";
 
-interface AuthFormData {
-  email: {
-    value: string;
-    isValid: boolean;
-  };
-  password: {
-    value: string;
-    isValid: boolean;
-  };
+interface FormField<T> {
+  value: T;
+  isValid: boolean;
 }
 
-interface RegFormData {
-  email: {
-    value: string;
-    isValid: boolean;
-  };
-  password: {
-    value: string;
-    isValid: boolean;
-  };
-  confirmPassword: {
-    value: string;
-    isValid: boolean;
-  };
-  name: {
-    value: string;
-    isValid: boolean;
-  };
-  surname: {
-    value: string;
-    isValid: boolean;
-  };
-  legal: {
-    value: boolean;
-    isValid: boolean;
-  };
+interface AuthFormData {
+  email: FormField<string>;
+  password: FormField<string>;
+}
+
+interface RegFormData extends AuthFormData {
+  confirmPassword: FormField<string>;
+  name: FormField<string>;
+  surname: FormField<string>;
+  legal: FormField<boolean>;
 }
 
 interface IAuthContextProps {
@@ -58,26 +37,25 @@ export const AuthContext = createContext<IAuthContextProps | undefined>(
   undefined
 );
 
-export const defaultAuthData = {
-  email: { value: "", isValid: true },
-  password: { value: "", isValid: true },
+const defaultField = <T,>(value: T): FormField<T> => ({ value, isValid: true });
+
+export const defaultAuthData: AuthFormData = {
+  email: defaultField(""),
+  password: defaultField(""),
 };
 
-export const defaultRegData = {
-  email: { value: "", isValid: true },
-  password: { value: "", isValid: true },
-  confirmPassword: { value: "", isValid: true },
-  name: { value: "", isValid: true },
-  surname: { value: "", isValid: true },
-  legal: { value: false, isValid: true },
+export const defaultRegData: RegFormData = {
+  ...defaultAuthData,
+  confirmPassword: defaultField(""),
+  name: defaultField(""),
+  surname: defaultField(""),
+  legal: defaultField(false),
 };
 
 const AuthContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [authFormData, setAuthFormData] =
     useState<AuthFormData>(defaultAuthData);
-
   const [regFormData, setRegFormData] = useState<RegFormData>(defaultRegData);
-
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
 
   return (

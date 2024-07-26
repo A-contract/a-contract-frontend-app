@@ -12,7 +12,7 @@ const AnalyseContract = () => {
         className={"sections"}
         pt={16}
         pb={10}
-        sx={{ backgroundColor: "primary.light", opacity: "20" }}
+        sx={{ backgroundColor: "secondary.main", opacity: "20" }}
       >
         <Container>
           <Description />
