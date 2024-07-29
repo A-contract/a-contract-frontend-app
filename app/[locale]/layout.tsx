@@ -5,6 +5,7 @@ import ThemeProvider from "@/theme/ThemeProvider";
 import { CssBaseline } from "@mui/material";
 import AuthContextProvider from "@/context/AuthContext";
 import CabinetContextProvider from "@/context/CabinetContext";
+import UserContextProvider from "@/context/UserContext";
 
 interface IParams {
   locale: string;
@@ -19,10 +20,10 @@ const RootLayout = ({ children, params }: IRootLayoutProps) => {
     <I18nProviderClient locale={params.locale}>
       <ThemeProvider>
         <AuthContextProvider>
-          <CabinetContextProvider>
+          <UserContextProvider>
             <CssBaseline />
             {children}
-          </CabinetContextProvider>
+          </UserContextProvider>
         </AuthContextProvider>
       </ThemeProvider>
     </I18nProviderClient>

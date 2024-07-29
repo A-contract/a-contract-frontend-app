@@ -6,9 +6,9 @@ import Workspace from "./Workspace";
 import { Box } from "@mui/material";
 import Support from "./Support";
 import Settings from "./Settings";
-import { usePathname } from "next/navigation";
+import { notFound, usePathname } from "next/navigation";
 
-const TABS_CONTENT: { [key: string]: JSX.Element } = {
+const TABS: { [key: string]: JSX.Element } = {
   contracts: <Contracts />,
   workspace: <Workspace />,
   support: <Support />,
@@ -17,10 +17,12 @@ const TABS_CONTENT: { [key: string]: JSX.Element } = {
 
 const Cabinet = () => {
   const route = usePathname();
-  const activeTab = route.split("/").pop() || "contracts";
+  const activeTab = route.split("/").pop();
+
+  if (!TABS[activeTab as string]) return notFound();
 
   return (
-    <Box display="flex">
+    <Box sx={{ display: "flex", minWidth: 750, overflow: "auto" }}>
       <Header />
       <Drawer activeTab={activeTab as string} />
       <Box
@@ -31,9 +33,10 @@ const Cabinet = () => {
           height: "100%",
           p: "25px",
           overflow: "auto",
+          bgcolor: "#edededbf",
         }}
       >
-        {TABS_CONTENT[activeTab as string]}
+        {TABS[activeTab as string]}
       </Box>
     </Box>
   );

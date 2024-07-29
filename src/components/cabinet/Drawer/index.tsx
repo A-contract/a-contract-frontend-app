@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import {
   Toolbar,
   Box,
@@ -54,7 +55,50 @@ const DRAWER_TABS = [
 
 const drawerWidth = 200;
 
-const Drawer = ({ activeTab }: { activeTab: string }) => {
+const Drawer = React.memo(({ activeTab }: { activeTab: string }) => {
+  const activeIndex = useMemo(
+    () => DRAWER_TABS.findIndex((item) => item.tab === activeTab),
+    [activeTab]
+  );
+
+  const tabComponents = useMemo(
+    () =>
+      DRAWER_TABS.map(({ name, tab, href, icon, mlIcon, mlText, mt = 0.5 }) => (
+        <Tab
+          key={name}
+          component={Link}
+          href={href}
+          label={
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography sx={{ ml: mlText }}>{name}</Typography>
+            </Box>
+          }
+          sx={{
+            width: "100%",
+            color: "secondary.main",
+            textTransform: "inherit",
+            minHeight: 48,
+            mt: mt,
+            justifyContent: "initial",
+            opacity: 1,
+            bgcolor: tab === activeTab ? "primary.light" : "inherit",
+          }}
+          icon={
+            <Box
+              component="img"
+              src={icon}
+              sx={{
+                ml: mlIcon,
+                color: "secondary.main",
+              }}
+            />
+          }
+          iconPosition="start"
+        />
+      )),
+    [activeTab]
+  );
+
   return (
     <MuiDrawer
       sx={{
@@ -86,7 +130,7 @@ const Drawer = ({ activeTab }: { activeTab: string }) => {
       <Tabs
         orientation="vertical"
         textColor="secondary"
-        value={DRAWER_TABS.findIndex((item) => item.tab === activeTab)}
+        value={activeIndex}
         sx={{
           backgroundColor: "primary.main",
           mt: 5,
@@ -95,44 +139,12 @@ const Drawer = ({ activeTab }: { activeTab: string }) => {
           sx: { display: "none" },
         }}
       >
-        {DRAWER_TABS.map(
-          ({ name, tab, href, icon, mlIcon, mlText, mt = 0.5 }) => (
-            <Tab
-              key={name}
-              component={Link}
-              href={href}
-              label={
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography sx={{ ml: mlText }}>{name}</Typography>
-                </Box>
-              }
-              sx={{
-                width: "100%",
-                color: "secondary.main",
-                textTransform: "inherit",
-                minHeight: 48,
-                mt: mt,
-                justifyContent: "initial",
-                opacity: 1,
-                bgcolor: tab === activeTab ? "primary.light" : "inherit",
-              }}
-              icon={
-                <Box
-                  component="img"
-                  src={icon}
-                  sx={{
-                    ml: mlIcon,
-                    color: "secondary.main",
-                  }}
-                />
-              }
-              iconPosition="start"
-            />
-          )
-        )}
+        {tabComponents}
       </Tabs>
     </MuiDrawer>
   );
-};
+});
+
+Drawer.displayName = "Drawer";
 
 export default Drawer;
