@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const tableButton = (label: string, icon: JSX.Element, callback: () => {}) => (
+const TableButton = (label: string, icon: JSX.Element, callback: () => {}) => (
   <Button
     variant="outlined"
     sx={{
@@ -19,4 +19,4 @@ const tableButton = (label: string, icon: JSX.Element, callback: () => {}) => (
   </Button>
 );
 
-export default tableButton;
+export default TableButton;
