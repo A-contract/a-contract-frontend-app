@@ -1,30 +1,45 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { CreateColumn, CreateGrid } from "./TableComponents";
+import MobileTable from "./MobileTable";
 
 const Table = () => {
-    return (
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Box sx={{ pb: 2 }}>
-                <Typography>Contracts</Typography>
-            </Box>
-            <Box sx={{ flexGrow: 1 }}>
-                <DataGrid
-                    sx={{
-                        height: "100%",
-                        maxWidth: {
-                            xs: "-webkit-fill-available",
-                            md: "-webkit-fill-available",
-                        },
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(800));
+  return (
+    <Paper
+      sx={{
+        px: 2,
+        py: 2,
+        mt: { xs: 2, md: 2, lg: 0 },
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
 
-                        "& .MuiDataGrid-cell": { whiteSpace: "inherit" },
-                    }}
-                    rows={CreateGrid()}
-                    columns={CreateColumn()}
-                />
-            </Box>
-        </Paper>
-    );
+        maxHeight: 600,
+      }}
+    >
+      <Box sx={{ pb: 2 }}>
+        <Typography sx={{ fontSize: 18, textTransform: "uppercase" }}>
+          Contracts
+        </Typography>
+      </Box>
+      <Box sx={{ flexGrow: 1, minHeight: 400, overflow: "auto" }}>
+        {!isMatch ? (
+          <DataGrid
+            sx={{
+              height: "100%",
+              "& .MuiDataGrid-cell": { whiteSpace: "inherit" },
+            }}
+            rows={CreateGrid()}
+            columns={CreateColumn()}
+          />
+        ) : (
+          <MobileTable />
+        )}
+      </Box>
+    </Paper>
+  );
 };
 
 export default Table;

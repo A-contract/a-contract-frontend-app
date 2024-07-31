@@ -13,23 +13,18 @@ export interface CabinetTabData {
 }
 
 interface ICabinetContextProps {
-  activeTab: CabinetTabData;
-  setActiveTab: Dispatch<SetStateAction<CabinetTabData>>;
+  openDrawer: Boolean;
+  setOpenDrawer: Dispatch<SetStateAction<Boolean>>;
 }
 
 export const CabinetContext = createContext<ICabinetContextProps | undefined>(
   undefined
 );
 
-export const defaultTabData: CabinetTabData = {
-  name: "Contracts",
-  url: "/contracts",
-};
-
 const CabinetContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [activeTab, setActiveTab] = useState<CabinetTabData>(defaultTabData);
+  const [openDrawer, setOpenDrawer] = useState<Boolean>(false);
   return (
-    <CabinetContext.Provider value={{ activeTab, setActiveTab }}>
+    <CabinetContext.Provider value={{ openDrawer, setOpenDrawer }}>
       {children}
     </CabinetContext.Provider>
   );

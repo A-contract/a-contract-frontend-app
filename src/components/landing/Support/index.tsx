@@ -15,10 +15,7 @@ const SupportSection = () => {
       flexDirection={isMatch ? "column" : "row"}
       justifyContent="center"
       alignItems={isMatch ? "center" : "flex-start"}
-      pt={10}
-      pb={15}
-      px={2}
-      mx="auto"
+      sx={{ pt: 10, pb: 15, px: 4, mx: "auto" }}
     >
       <Box
         display="flex"

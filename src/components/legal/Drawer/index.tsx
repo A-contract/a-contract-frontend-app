@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import {
   Drawer as MuiDrawer,
   Toolbar,
@@ -6,11 +6,14 @@ import {
   Divider,
   Tabs,
   Tab,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import Link from "next/link";
 import TermsAndConditionsContent from "../TermsAndConditions/TermsAndConditionsContent";
 import PrivacyPolicyContent from "../PrivacyPolicy/PrivacyPolicyContent";
 import { useScopedI18n } from "@/locales/client";
+import { LegalContext } from "@/context/LegalContext";
 
 const DRAWER_TABS = [
   {
@@ -29,6 +32,9 @@ const DRAWER_TABS = [
 
 const Drawer = React.memo(
   ({ drawerWidth, activeTab }: { drawerWidth: number; activeTab: string }) => {
+    const legalData = useContext(LegalContext);
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down(1200));
     const scopedT = useScopedI18n("Legal");
 
     const activeIndex = useMemo(
@@ -51,8 +57,10 @@ const Drawer = React.memo(
 
     return (
       <MuiDrawer
+        open={legalData?.openDrawer ? true : false}
         sx={{
-          width: drawerWidth,
+          width: !isMatch ? drawerWidth : 0,
+          minWidth: !isMatch ? drawerWidth : 0,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
@@ -63,7 +71,8 @@ const Drawer = React.memo(
               "0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)",
           },
         }}
-        variant="permanent"
+        onClose={() => legalData?.setOpenDrawer(false)}
+        variant={isMatch ? "temporary" : "permanent"}
         anchor="left"
       >
         <Toolbar sx={{ bgcolor: "primary.dark" }}>

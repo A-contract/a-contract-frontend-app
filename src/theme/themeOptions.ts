@@ -9,7 +9,7 @@ const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: "#FFFFFF",
-      dark: "#ffffffbf",
+      dark: "#edededbf",
       light: "#eeeeee",
     },
     success: {
@@ -19,7 +19,7 @@ const themeOptions: ThemeOptions = {
     },
     info: {
       main: "#638D6E",
-      dark: "#efeeee",
+      dark: "#cbcbcb",
       light: "#577C61",
     },
     warning: {

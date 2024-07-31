@@ -21,8 +21,10 @@ const RootLayout = ({ children, params }: IRootLayoutProps) => {
       <ThemeProvider>
         <AuthContextProvider>
           <UserContextProvider>
-            <CssBaseline />
-            {children}
+            <CabinetContextProvider>
+              <CssBaseline />
+              {children}
+            </CabinetContextProvider>
           </UserContextProvider>
         </AuthContextProvider>
       </ThemeProvider>

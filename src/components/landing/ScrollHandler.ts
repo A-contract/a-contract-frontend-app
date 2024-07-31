@@ -24,6 +24,7 @@ const ScrollHandler: React.FC = () => {
         }
       });
     },
+
     [dispatch, tabsDesktop]
   );
 

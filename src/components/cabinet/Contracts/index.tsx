@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Table from "./Table";
 import ContractsUploader from "./ContractsUploader";
 
@@ -12,13 +12,27 @@ const Contracts = () => {
         overflow: "hidden",
       }}
     >
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ width: "400px", minWidth: "350px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "column", lg: "row" },
+        }}
+      >
+        <Box
+          sx={{
+            width: {
+              xs: "-webkit-fill-available",
+              md: "-webkit-fill-available",
+              lg: 400,
+            },
+          }}
+        >
           <ContractsUploader />
         </Box>
         <Box
           sx={{
-            pl: 2,
+            pl: { lg: 2 },
+            pt: { lg: 0, xs: 2, md: 2 },
             width: "100%",
             maxWidth: "100%",
             overflow: "auto",

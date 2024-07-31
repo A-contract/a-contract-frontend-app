@@ -23,7 +23,7 @@ const Legal = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Header drawerWidth={drawerWidth} />
+      <Header />
 
       <Drawer drawerWidth={drawerWidth} activeTab={activeTab as string} />
       <Box

@@ -3,7 +3,7 @@ import Drawer from "./Drawer";
 import Header from "./Header";
 import Contracts from "./Contracts";
 import Workspace from "./Workspace";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import Support from "./Support";
 import Settings from "./Settings";
 import { notFound, usePathname } from "next/navigation";
@@ -18,11 +18,13 @@ const TABS: { [key: string]: JSX.Element } = {
 const Cabinet = () => {
   const route = usePathname();
   const activeTab = route.split("/").pop();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(1200));
 
   if (!TABS[activeTab as string]) return notFound();
 
   return (
-    <Box sx={{ display: "flex", minWidth: 750, overflow: "auto" }}>
+    <Box sx={{ display: "flex" }}>
       <Header />
       <Drawer activeTab={activeTab as string} />
       <Box
@@ -31,9 +33,9 @@ const Cabinet = () => {
           mt: "65px",
           width: "100%",
           height: "100%",
-          p: "25px",
+          p: isMatch ? 0 : 2,
           overflow: "auto",
-          bgcolor: "#edededbf",
+          bgcolor: "secondary.dark",
         }}
       >
         {TABS[activeTab as string]}

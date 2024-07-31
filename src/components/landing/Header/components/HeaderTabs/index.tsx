@@ -40,39 +40,40 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
 
   const mainTabs = tabsDesktop.map(renderTab);
 
-  const additionalTabs = orientation === "vertical" && (
-    <>
-      <Tab
-        key="signIn"
-        label="Sign In"
-        href="/auth"
-        sx={{
-          color: "secondary.main",
-          borderTop: "1px solid",
-          borderColor: "#ffffff4a",
-          ml: isMatch ? 1 : 0,
-          "&.Mui-selected": {
-            color: "secondary.main",
-          },
-        }}
-      />
-      <Tab
-        key="signUp"
-        label="Sign Up"
-        href="/auth"
-        sx={{
-          color: "secondary.main",
-          ml: isMatch ? 1 : 0,
-          "&.Mui-selected": {
-            color: "secondary.main",
-          },
-        }}
-      />
-    </>
-  );
+  const additionalTabs =
+    orientation === "vertical"
+      ? [
+          <Tab
+            key="signIn"
+            label="Sign In"
+            href="/auth"
+            sx={{
+              color: "secondary.main",
+              borderTop: "1px solid",
+              borderColor: "#ffffff4a",
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "secondary.main",
+              },
+            }}
+          />,
+          <Tab
+            key="signUp"
+            label="Sign Up"
+            href="/auth"
+            sx={{
+              color: "secondary.main",
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "secondary.main",
+              },
+            }}
+          />,
+        ]
+      : [];
 
   return (
-    <Box>
+    <Box sx={{ bgcolor: "primary.main" }}>
       <Tabs
         orientation={orientation}
         value={activeTabId}
@@ -83,8 +84,7 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
           sx: { backgroundColor: "secondary.main" },
         }}
       >
-        {mainTabs}
-        {additionalTabs}
+        {mainTabs.concat(additionalTabs)}
       </Tabs>
     </Box>
   );

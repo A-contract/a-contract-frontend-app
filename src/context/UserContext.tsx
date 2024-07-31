@@ -12,7 +12,7 @@ interface IUserContext {
 }
 
 const defaultUserData = {
-  role: "customer",
+  role: "Customer",
   name: "Tomas Fridrigovich",
 };
 
