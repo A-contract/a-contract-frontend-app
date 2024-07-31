@@ -1,5 +1,5 @@
   html {
-      background-color: #fff;
+      background-color: #edededbf;
     }
 
   a {
@@ -9,7 +9,7 @@
 
   @media (prefers-color-scheme: dark) {
     html {
-      background-color: #fff;
+      background-color: #edededbf;
       
     }
   }

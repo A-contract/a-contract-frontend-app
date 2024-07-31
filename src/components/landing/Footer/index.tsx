@@ -89,7 +89,7 @@ const Footer = () => {
           justifyContent="center"
           width="100%"
           px={isMatch ? 0 : 5}
-          gap={isMatch ? 2 : 60}
+          gap={{ xs: 5, md: 2, lg: 60 }}
         >
           <Box
             sx={{ m: 1, textAlign: "center" }}

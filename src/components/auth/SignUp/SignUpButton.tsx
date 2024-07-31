@@ -66,13 +66,13 @@ const SignUpButton = () => {
         variant="outlined"
         onClick={handleSubmit}
         sx={{
-          bgcolor: theme.palette.info.light,
-          color: theme.palette.secondary.main,
-          borderColor: theme.palette.info.main,
+          bgcolor: "info.light",
+          color: "secondary.main",
+          borderColor: "info.main",
           width: "300px",
           "&:hover": {
-            bgcolor: theme.palette.info.main,
-            borderColor: theme.palette.info.main,
+            bgcolor: "info.main",
+            borderColor: "info.main",
           },
         }}
       >

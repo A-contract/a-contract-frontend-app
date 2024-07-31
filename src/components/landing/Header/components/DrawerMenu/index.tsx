@@ -7,24 +7,27 @@ import LanguageSelector from "../LanguageSelector";
 
 const DrawerMenu = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const theme = useTheme();
 
   return (
-    <>
+    <Box sx={{ bgcolor: "primary.main" }}>
       <Drawer
-        anchor="top"
         open={openDrawer}
+        sx={{
+          "& .MuiDrawer-paper": {
+            backgroundColor: "primary.main",
+          },
+        }}
         onClose={() => setOpenDrawer(false)}
       >
         <HeaderTabs orientation={"vertical"} />
       </Drawer>
       <IconButton
-        sx={{ color: theme.palette.secondary.main }}
+        sx={{ color: "secondary.main" }}
         onClick={() => setOpenDrawer(!openDrawer)}
       >
-        <MenuIcon sx={{ color: theme.palette.secondary.main }} />
+        <MenuIcon sx={{ color: "secondary.main" }} />
       </IconButton>
-    </>
+    </Box>
   );
 };
 

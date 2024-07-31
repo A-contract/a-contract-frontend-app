@@ -10,9 +10,13 @@ const AnalyseContract = () => {
       <Box
         id={"analyse-contract"}
         className={"sections"}
-        pt={16}
-        pb={10}
-        sx={{ backgroundColor: "primary.light", opacity: "20" }}
+        sx={{
+          backgroundColor: "secondary.main",
+          opacity: "20",
+          px: 2,
+          pt: 16,
+          pb: 10,
+        }}
       >
         <Container>
           <Description />

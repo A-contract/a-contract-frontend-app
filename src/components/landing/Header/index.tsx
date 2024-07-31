@@ -7,13 +7,13 @@ import DrawerMenu from "./components/DrawerMenu";
 
 const Header = () => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const isMatch = useMediaQuery(theme.breakpoints.down(1050));
 
   return (
     <AppBar
       component="header"
       color="primary"
-      sx={{ bgcolor: "primary.dark", alignItems: "center" }}
+      sx={{ bgcolor: "primary.main", alignItems: "center" }}
     >
       <Box maxWidth={1300} width="100%">
         <Toolbar>
@@ -28,7 +28,8 @@ const Header = () => {
             </Box>
           </Box>
           {isMatch ? (
-            <Box ml="auto">
+            <Box ml="auto" sx={{ display: "flex", alignItems: "center" }}>
+              <LanguageSelector />
               <DrawerMenu />
             </Box>
           ) : (

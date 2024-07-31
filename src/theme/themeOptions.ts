@@ -3,13 +3,13 @@ import { ThemeOptions } from "@mui/material";
 const themeOptions: ThemeOptions = {
   palette: {
     primary: {
-      main: "#0A0910",
+      main: "#100f17",
       dark: "#000000",
-      light: "#FFFFFF",
+      light: "#33304b",
     },
     secondary: {
       main: "#FFFFFF",
-      dark: "#ffffffbf",
+      dark: "#edededbf",
       light: "#eeeeee",
     },
     success: {
@@ -19,7 +19,7 @@ const themeOptions: ThemeOptions = {
     },
     info: {
       main: "#638D6E",
-      dark: "#efeeee",
+      dark: "#cbcbcb",
       light: "#577C61",
     },
     warning: {

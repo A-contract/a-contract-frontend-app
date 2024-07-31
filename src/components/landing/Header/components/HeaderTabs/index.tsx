@@ -32,7 +32,7 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         color: tab.color,
         ml: isMatch ? 1 : 0,
         "&.Mui-selected": {
-          color: "primary.light",
+          color: "secondary.main",
         },
       }}
     />
@@ -40,51 +40,51 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
 
   const mainTabs = tabsDesktop.map(renderTab);
 
-  const additionalTabs = orientation === "vertical" && (
-    <>
-      <Tab
-        key="signIn"
-        label="Sign In"
-        href="/auth"
-        sx={{
-          color: "primary.light",
-          borderTop: "1px solid",
-          borderColor: "#ffffff4a",
-          ml: isMatch ? 1 : 0,
-          "&.Mui-selected": {
-            color: "primary.light",
-          },
-        }}
-      />
-      <Tab
-        key="signUp"
-        label="Sign Up"
-        href="/auth"
-        sx={{
-          color: "primary.light",
-          ml: isMatch ? 1 : 0,
-          "&.Mui-selected": {
-            color: "primary.light",
-          },
-        }}
-      />
-    </>
-  );
+  const additionalTabs =
+    orientation === "vertical"
+      ? [
+          <Tab
+            key="signIn"
+            label="Sign In"
+            href="/auth"
+            sx={{
+              color: "secondary.main",
+              borderTop: "1px solid",
+              borderColor: "#ffffff4a",
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "secondary.main",
+              },
+            }}
+          />,
+          <Tab
+            key="signUp"
+            label="Sign Up"
+            href="/auth"
+            sx={{
+              color: "secondary.main",
+              ml: isMatch ? 1 : 0,
+              "&.Mui-selected": {
+                color: "secondary.main",
+              },
+            }}
+          />,
+        ]
+      : [];
 
   return (
-    <Box>
+    <Box sx={{ bgcolor: "primary.main" }}>
       <Tabs
         orientation={orientation}
         value={activeTabId}
         sx={{
-          bgcolor: "primary.dark",
+          bgcolor: "primary.main",
         }}
         TabIndicatorProps={{
-          sx: { backgroundColor: "primary.light" },
+          sx: { backgroundColor: "secondary.main" },
         }}
       >
-        {mainTabs}
-        {additionalTabs}
+        {mainTabs.concat(additionalTabs)}
       </Tabs>
     </Box>
   );
