@@ -1,3 +1,4 @@
+import { useScopedI18n } from "@/locales/client";
 import { setActiveAuthForm } from "@/store/authForm/authForm";
 import { Box, Typography, useTheme } from "@mui/material";
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { useDispatch } from "react-redux";
 
 const SignInLinks = () => {
   const theme = useTheme();
+  const scopedT = useScopedI18n("Auth.SignIn");
   const dispatch = useDispatch();
   return (
     <>
@@ -21,7 +23,7 @@ const SignInLinks = () => {
               },
             }}
           >
-            Don&apos;t remember your password?
+            {scopedT("form.link1")}
           </Typography>
         </Link>
       </Box>
@@ -38,7 +40,7 @@ const SignInLinks = () => {
           }}
           onClick={() => dispatch(setActiveAuthForm(1))}
         >
-          Don&apos;t have an account? Sign up
+          {scopedT("form.link2")}
         </Typography>
       </Box>
     </>

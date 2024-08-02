@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import Header from "./Header";
+import { useScopedI18n } from "@/locales/client";
 
 const Blog = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const scopedT = useScopedI18n("Blog");
 
   const handleTabChange = (
     event: React.SyntheticEvent,
@@ -21,7 +23,7 @@ const Blog = () => {
     setActiveTab(newTabIndex);
   };
 
-  const tabs = [{ label: "All Posts", component: <></> }];
+  const tabs = [{ label: scopedT("Categories.allPosts"), component: <></> }];
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -39,7 +41,7 @@ const Blog = () => {
           }}
         >
           <Typography variant="h4" component="h1">
-            Blog
+            {scopedT("Title")}
           </Typography>
         </Box>
         <Divider />

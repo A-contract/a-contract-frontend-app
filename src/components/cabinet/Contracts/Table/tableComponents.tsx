@@ -1,42 +1,45 @@
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import PaymentIcon from "@mui/icons-material/Payment";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { UserContext } from "@/context/UserContext";
 import { useContext } from "react";
 import TableButton from "./TableButton";
+import { GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import { useScopedI18n } from "@/locales/client";
 
 export const CreateColumn: () => GridColDef[] = () => {
   const userData = useContext(UserContext);
+  const scopedT = useScopedI18n("Cabinet.Contracts");
+
   return [
     {
       field: "number",
-      headerName: "№",
+      headerName: scopedT("contracts.table.column1"),
       width: 70,
       headerAlign: "center",
       align: "center",
     },
     {
       field: "contractName",
-      headerName: "Contract Name",
+      headerName: scopedT("contracts.table.column2"),
       headerAlign: "center",
       align: "center",
       width: 200,
     },
     {
       field: "paymentStatus",
-      headerName: "Payment Status",
+      headerName: scopedT("contracts.table.column3"),
       width: 200,
       headerAlign: "center",
       align: "center",
       renderCell: () =>
-        TableButton("To pay", <PaymentIcon />, () => {
+        TableButton("contracts.table.button1", <PaymentIcon />, () => {
           return {};
         }),
     },
     {
       field: "progressStatus",
-      headerName: "Progress Status",
+      headerName: scopedT("contracts.table.column4"),
       width: 200,
       headerAlign: "center",
       align: "center",
@@ -44,19 +47,19 @@ export const CreateColumn: () => GridColDef[] = () => {
         userData.user.role === "Customer" ? (
           <>In progress</>
         ) : (
-          TableButton("To process", <PlayArrowIcon />, () => {
+          TableButton("contracts.table.button2", <PlayArrowIcon />, () => {
             return {};
           })
         ),
     },
     {
       field: "download",
-      headerName: "Download",
+      headerName: scopedT("contracts.table.column5"),
       width: 200,
       headerAlign: "center",
       align: "center",
       renderCell: () =>
-        TableButton("Download", <FileDownloadIcon />, () => {
+        TableButton("contracts.table.button3", <FileDownloadIcon />, () => {
           return {};
         }),
     },

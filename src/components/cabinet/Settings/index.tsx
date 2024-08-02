@@ -12,8 +12,10 @@ import {
   TextField,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useScopedI18n } from "@/locales/client";
 
 const Settings = () => {
+  const scopedT = useScopedI18n("Cabinet");
   return (
     <Container
       sx={{
@@ -32,7 +34,7 @@ const Settings = () => {
         }}
       >
         <Typography sx={{ fontSize: 18, textTransform: "uppercase", pb: 2 }}>
-          Settings
+          {scopedT("Settings.Title")}
         </Typography>
 
         <Box sx={{ display: "flex", px: 2 }}>
@@ -53,14 +55,14 @@ const Settings = () => {
               id="panel1bh-header"
             >
               <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                Personal information
+                {scopedT("Settings.section1.title")}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Divider />
               <Box sx={{ display: "flex", my: 2 }}>
                 <Box sx={{ width: 170, mt: "5px" }}>
-                  <Typography>Name</Typography>
+                  <Typography>{scopedT("Settings.section1.name")}</Typography>
                 </Box>
                 <Box sx={{ width: 200, mr: 1, mt: "1px" }}>
                   <TextField
@@ -89,14 +91,16 @@ const Settings = () => {
                     //   saveFullName();
                     // }}
                   >
-                    Save
+                    {scopedT("Settings.section1.button")}
                   </Button>
                 </Box>
               </Box>
               <Divider />
               <Box sx={{ display: "flex", my: 2 }}>
                 <Box sx={{ width: 170, mt: "5px" }}>
-                  <Typography>Surname</Typography>
+                  <Typography>
+                    {scopedT("Settings.section1.surname")}
+                  </Typography>
                 </Box>
                 <Box sx={{ width: 200, mr: 1, mt: "1px" }}>
                   <TextField
@@ -125,7 +129,7 @@ const Settings = () => {
                     //   saveFullName();
                     // }}
                   >
-                    Save
+                    {scopedT("Settings.section1.button")}
                   </Button>
                 </Box>
               </Box>

@@ -1,4 +1,5 @@
 import { UserContext } from "@/context/UserContext";
+import { useScopedI18n } from "@/locales/client";
 import { Paper, Box, Typography, Button } from "@mui/material";
 import { DropzoneArea } from "mui-file-dropzone";
 import { useContext, useRef } from "react";
@@ -39,6 +40,7 @@ const renderLawyerContractDetails = () => (
 
 const ContractsUploader = () => {
   const { user } = useContext(UserContext);
+  const scopedT = useScopedI18n("Cabinet");
   const dropzoneRef = useRef<any>(null);
 
   return (
@@ -46,12 +48,12 @@ const ContractsUploader = () => {
       <Box sx={{ pb: 2 }}>
         {user.role === "Customer" && (
           <Typography sx={{ fontSize: 18, textTransform: "uppercase" }}>
-            Analyse contract
+            {scopedT("Contracts.analyseContracts.title1")}
           </Typography>
         )}
         {user.role === "Lawyer" && (
           <Typography sx={{ fontSize: 18, textTransform: "uppercase" }}>
-            Selected contract
+            {scopedT("Contracts.analyseContracts.title2")}
           </Typography>
         )}
       </Box>
@@ -62,7 +64,7 @@ const ContractsUploader = () => {
           ref={dropzoneRef}
           filesLimit={1}
           acceptedFiles={[".doc", ".docx", ".pdf"]}
-          dropzoneText={"Attach your contract"}
+          dropzoneText={scopedT("Contracts.analyseContracts.uploadLabel")}
           onChange={() => {}} // (files) => setFile(files[0])
         />
       </Box>
@@ -87,7 +89,9 @@ const ContractsUploader = () => {
           }}
           //   onClick={() => sendContract()}
         >
-          {user.role === "Customer" ? "Analyse contract" : "Finish"}
+          {user.role === "Customer"
+            ? scopedT("Contracts.analyseContracts.button1")
+            : scopedT("Contracts.analyseContracts.button2")}
         </Button>
       </Box>
     </Paper>

@@ -1,25 +1,17 @@
+import { HomeContext, tabsDesktop } from "@/context/HomeContext";
 import { useScopedI18n } from "@/locales/client";
-import { setActiveLandpageTab } from "@/store/landing/header";
-import { RootState } from "@/store/store";
 import { Tabs, Tab, Box, useMediaQuery, useTheme } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext, useEffect } from "react";
 
 interface HeaderTabsProps {
   orientation: "horizontal" | "vertical";
 }
 
 const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
+  const homeData = useContext(HomeContext);
   const scopedT = useScopedI18n("Landing.Header.Tabs");
-  const { tabsDesktop, activeTabId } = useSelector(
-    (state: RootState) => state.landingHeader
-  );
-  const dispatch = useDispatch();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handleTabClick = (index: number) => {
-    dispatch(setActiveLandpageTab(index < 3 ? index : activeTabId));
-  };
 
   const renderTab = (tab: any, index: number) => (
     <Tab
@@ -27,7 +19,7 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
       label={scopedT(tab.name)}
       href={tab.href}
       target={tab.target}
-      onClick={() => handleTabClick(index)}
+      onClick={() => homeData?.setActiveTab(index)}
       sx={{
         color: tab.color,
         ml: isMatch ? 1 : 0,
@@ -72,11 +64,21 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ orientation }) => {
         ]
       : [];
 
+  useEffect(() => {
+    const activeTab =
+      tabsDesktop.filter((element) => element.href === location.hash)[0]?.id ||
+      0;
+
+    homeData?.setActiveTab(activeTab);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box sx={{ bgcolor: "primary.main" }}>
       <Tabs
         orientation={orientation}
-        value={activeTabId}
+        value={homeData?.activeTab}
         sx={{
           bgcolor: "primary.main",
         }}

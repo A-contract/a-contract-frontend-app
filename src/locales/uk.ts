@@ -328,5 +328,99 @@ export default {
       },
     },
   },
-  Blog: {},
+  Blog: {
+    Title: "Блог",
+    Categories: {
+      allPosts: "Усі пости",
+    },
+  },
+  Auth: {
+    Title: "Вхід у систему",
+    SignIn: {
+      title: "Авторизація",
+      form: {
+        email: "Електронна адреса",
+        password: "Пароль",
+        button: "Увійти",
+        link1: "Не пам'ятаєте свій пароль?",
+        link2: "Не маєте облікового запису? Зареєструйтесь",
+      },
+    },
+    SignUp: {
+      title: "Реєстрація",
+      form: {
+        name: "Ім'я",
+        surname: "Прізвище",
+        email: "Електронна адреса",
+        password: "Пароль",
+        confirmPassword: "Підтвердити пароль",
+        legalCheckBox:
+          "Реєструючись, ви погоджуєтеся з нашими умовами обслуговування та політикою конфіденційності *",
+        button: "Зареєструватися",
+      },
+    },
+  },
+  Cabinet: {
+    Title: "Кабінет",
+    Tabs: {
+      contracts: "Договори",
+      workspace: "Обробка",
+      support: "Підтримка",
+      settings: "Налаштування",
+      logout: "Вийти",
+    },
+    Contracts: {
+      analyseContracts: {
+        title1: "Аналіз договору",
+        title2: "Вибраний договір",
+        uploadLabel: "Завантажити договір",
+        button1: "Аналізувати договір",
+        button2: "Завершити",
+      },
+      contracts: {
+        title: "Договори",
+        table: {
+          column1: "№",
+          column2: "Ім'я договору",
+          column3: "Статус оплати",
+          column4: "Статус прогресу",
+          column5: "Завантажити",
+          button1: "Оплатити",
+          button2: "Обробити",
+          button3: "Завантажити",
+          footer: "Рядків на сторінці",
+        },
+      },
+    },
+    Support: {
+      Title: "Підтримка",
+      Description: {
+        paragraph1: "Як працює підтрика?",
+        paragraph2:
+          "Ознайомтесь будь-ласка з найчастішими питаннями, якщо не знайшли своє, то скористуйтесь зворотнім зв'язком, оператор Вам відповість в найкоротший термін.",
+        paragraph3: "Найчастіші питання",
+        paragraph4: "1. Для чого сервіс A-contract?",
+        paragraph5:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph6: "2. Які терміни обробки договорів?",
+        paragraph7:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph8: "3. Як проходить оплата?",
+        paragraph9:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph10: "4. Як завантажувати?",
+        paragraph11:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+      },
+    },
+    Settings: {
+      Title: "Налаштування",
+      section1: {
+        title: "Особиста інформація",
+        name: "Ім'я",
+        surname: "Прізвище",
+        button: "Зберегти",
+      },
+    },
+  },
 } as const;

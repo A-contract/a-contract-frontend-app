@@ -1,13 +1,9 @@
 "use client";
-import { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { setActiveLandpageTab } from "@/store/landing/header";
+import { useEffect, useCallback, useContext } from "react";
+import { HomeContext, tabsDesktop } from "@/context/HomeContext";
 
 const ScrollHandler: React.FC = () => {
-  const selectTabsData = (state: RootState) => state.landingHeader;
-  const { tabsDesktop } = useSelector(selectTabsData);
-  const dispatch = useDispatch();
+  const homeData = useContext(HomeContext);
 
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -18,14 +14,14 @@ const ScrollHandler: React.FC = () => {
             (element: any) => element.href === `#${id}`
           );
           if (matchedTab) {
-            dispatch(setActiveLandpageTab(matchedTab.id));
+            homeData?.setActiveTab(matchedTab.id);
             window.history.pushState(null, "", `#${id}`);
           }
         }
       });
     },
 
-    [dispatch, tabsDesktop]
+    [homeData]
   );
 
   useEffect(() => {

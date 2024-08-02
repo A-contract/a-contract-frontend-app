@@ -18,6 +18,8 @@ interface IAuthFormData {
 }
 
 interface IRegFormData extends IAuthFormData {
+  email: IFormField<string>;
+  password: IFormField<string>;
   confirmPassword: IFormField<string>;
   name: IFormField<string>;
   surname: IFormField<string>;
