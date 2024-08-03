@@ -3,10 +3,12 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
+import { useScopedI18n } from "@/locales/client";
 
-const FormFields = () => {
+const SignInFormFields = () => {
   const authContext = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const scopedT = useScopedI18n("Auth.SignIn");
 
   const handleInputChange =
     (field: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +27,8 @@ const FormFields = () => {
       <Box sx={{ pb: "25px" }}>
         <TextField
           required
-          placeholder="email"
-          label="email"
+          placeholder={scopedT("form.email")}
+          label={scopedT("form.email")}
           error={!authContext?.authFormData.email.isValid}
           helperText={
             !authContext?.authFormData.email.isValid
@@ -40,8 +42,8 @@ const FormFields = () => {
       <Box sx={{ pb: "25px" }}>
         <TextField
           required
-          placeholder="password"
-          label="password"
+          placeholder={scopedT("form.password")}
+          label={scopedT("form.password")}
           type={showPassword ? "text" : "password"}
           sx={{ width: "300px" }}
           error={!authContext?.authFormData.password.isValid}
@@ -71,4 +73,4 @@ const FormFields = () => {
   );
 };
 
-export default FormFields;
+export default SignInFormFields;

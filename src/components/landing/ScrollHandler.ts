@@ -1,49 +1,46 @@
 "use client";
-import { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { setActiveLandpageTab } from "@/store/landing/header";
+import { useEffect, useCallback, useContext } from "react";
+import { HomeContext, tabsDesktop } from "@/context/HomeContext";
 
 const ScrollHandler: React.FC = () => {
-  const selectTabsData = (state: RootState) => state.landingHeader;
-  const { tabsDesktop } = useSelector(selectTabsData);
-  const dispatch = useDispatch();
+    const homeData = useContext(HomeContext);
 
-  const handleIntersection = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          const matchedTab = tabsDesktop.find(
-            (element: any) => element.href === `#${id}`
-          );
-          if (matchedTab) {
-            dispatch(setActiveLandpageTab(matchedTab.id));
-            window.history.pushState(null, "", `#${id}`);
-          }
-        }
-      });
-    },
+    const handleIntersection = useCallback(
+        (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const matchedTab = tabsDesktop.find(
+                        (element: any) => element.href === `#${id}`
+                    );
+                    console.log(id);
+                    if (matchedTab) {
+                        homeData?.setActiveTab(matchedTab.id);
+                        window.history.pushState(null, "", `#${id}`);
+                    }
+                }
+            });
+        },
 
-    [dispatch, tabsDesktop]
-  );
+        [homeData]
+    );
 
-  useEffect(() => {
-    const sections = document.querySelectorAll(".sections");
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5,
-    };
+    useEffect(() => {
+        const sections = document.querySelectorAll(".sections");
+        const options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.5,
+        };
 
-    const observer = new IntersectionObserver(handleIntersection, options);
-    sections.forEach((section) => observer.observe(section));
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, [handleIntersection]);
+        const observer = new IntersectionObserver(handleIntersection, options);
+        sections.forEach((section) => observer.observe(section));
+        return () => {
+            sections.forEach((section) => observer.unobserve(section));
+        };
+    }, [handleIntersection]);
 
-  return null;
+    return null;
 };
 
 export default ScrollHandler;

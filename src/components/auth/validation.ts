@@ -12,5 +12,6 @@ export const isValidConfirmPassword = (
   password: string,
   confirmPassword: string
 ) => {
+  console.log(password, confirmPassword);
   return password === confirmPassword;
 };

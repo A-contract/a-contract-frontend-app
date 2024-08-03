@@ -7,31 +7,29 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
+import { useScopedI18n } from "@/locales/client";
 
 const questions = [
   {
-    question: "1. Для чого сервіс A-contract ?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+    question: "Support.Description.paragraph4",
+    answer: "Support.Description.paragraph5",
   },
   {
-    question: "2. Які терміни обробки договорів ?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+    question: "Support.Description.paragraph6",
+    answer: "Support.Description.paragraph7",
   },
   {
-    question: "3. Як проходить оплата ?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+    question: "Support.Description.paragraph8",
+    answer: "Support.Description.paragraph9",
   },
   {
-    question: "4. Як завантажувати ?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+    question: "Support.Description.paragraph10",
+    answer: "Support.Description.paragraph11",
   },
 ];
 
 const Info = () => {
+  const scopedT = useScopedI18n("Cabinet");
   return (
     <Box
       sx={{
@@ -49,24 +47,22 @@ const Info = () => {
       }}
     >
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Як працює підтримка ?
+        {scopedT("Support.Description.paragraph1")}
       </Typography>
       <Typography sx={{ mb: 3 }}>
-        Ознайомтесь будь-ласка з найчастішими питаннями, якщо не знайшли своє,
-        то скористуйтесь зворотнім зв&apos;язком, оператор Вам відповість в
-        найкоротший термін.
+        {scopedT("Support.Description.paragraph2")}
       </Typography>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Найчастіші питання
+        {scopedT("Support.Description.paragraph3")}
       </Typography>
 
       {questions.map((element, index) => (
         <Accordion key={index}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{element.question}</Typography>
+            <Typography>{scopedT(element.question as any)}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>{element.answer}</Typography>
+            <Typography>{scopedT(element.answer as any)}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}

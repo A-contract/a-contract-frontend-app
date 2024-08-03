@@ -1,7 +1,17 @@
 import LanguageSelector from "@/components/landing/Header/components/LanguageSelector";
-import { AppBar, Toolbar, Box, Typography } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 
 const Header = () => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <AppBar
       sx={{
@@ -18,12 +28,15 @@ const Header = () => {
             width={160}
           />
         </Box>
-        <Box sx={{ ml: 15 }}>
-          <Typography variant="h6" noWrap component="div">
-            Blog
-          </Typography>
-        </Box>
-        <Box sx={{ ml: "auto", mr: 10 }}>
+        {!isMatch && (
+          <Box sx={{ ml: 15 }}>
+            <Typography variant="h6" noWrap component="div">
+              Blog
+            </Typography>
+          </Box>
+        )}
+
+        <Box sx={{ ml: "auto" }}>
           <LanguageSelector />
         </Box>
       </Toolbar>

@@ -16,12 +16,14 @@ import LanguageSelector from "@/components/landing/Header/components/LanguageSel
 import { UserContext } from "@/context/UserContext";
 import { BaseSyntheticEvent, useContext, useState } from "react";
 import { CabinetContext } from "@/context/CabinetContext";
+import { useScopedI18n } from "@/locales/client";
 
 const drawerWidth = 200;
 
 const Header = () => {
   const userData = useContext(UserContext);
   const cabinetData = useContext(CabinetContext);
+  const scopedT = useScopedI18n("Cabinet");
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(1200));
   const [anchorEl, setAnchorEl] = useState(null);
@@ -55,7 +57,7 @@ const Header = () => {
           <>
             <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
               <Typography variant="h6" sx={{ color: "secondary.main" }}>
-                Cabinet
+                {scopedT("Title")}
               </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", ml: "auto" }}>

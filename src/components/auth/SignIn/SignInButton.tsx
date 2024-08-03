@@ -3,10 +3,12 @@ import { Box, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
 import { isValidEmail, isValidPassword } from "../validation";
+import { useScopedI18n } from "@/locales/client";
 
 const SignInButton = () => {
   const theme = useTheme();
   const authContext = useContext(AuthContext);
+  const scopedT = useScopedI18n("Auth.SignIn");
 
   const handleSubmit = () => {
     if (!authContext) return;
@@ -46,7 +48,7 @@ const SignInButton = () => {
           },
         }}
       >
-        Sign in
+        {scopedT("form.button")}
       </Button>
     </Box>
   );

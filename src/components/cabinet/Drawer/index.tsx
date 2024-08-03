@@ -14,10 +14,11 @@ import {
 import Link from "next/link";
 import { UserContext } from "@/context/UserContext";
 import { CabinetContext } from "@/context/CabinetContext";
+import { useScopedI18n } from "@/locales/client";
 
 const DRAWER_TABS = [
   {
-    name: "Contracts",
+    name: "Tabs.contracts",
     tab: "contracts",
     href: "/cabinet/contracts",
     icon: "/static/images/icons/contracts_icon.png",
@@ -25,7 +26,7 @@ const DRAWER_TABS = [
     mlText: 2,
   },
   {
-    name: "Workspace",
+    name: "Tabs.workspace",
     tab: "workspace",
     href: "/cabinet/workspace",
     icon: "/static/images/icons/workspace_icon.png",
@@ -34,7 +35,7 @@ const DRAWER_TABS = [
     access: ["Lawyer"],
   },
   {
-    name: "Support",
+    name: "Tabs.support",
     tab: "support",
     href: "/cabinet/support",
     icon: "/static/images/icons/support_icon.png",
@@ -42,7 +43,7 @@ const DRAWER_TABS = [
     mlText: 2,
   },
   {
-    name: "Settings",
+    name: "Tabs.settings",
     tab: "settings",
     href: "/cabinet/settings",
     icon: "/static/images/icons/settings_icon.png",
@@ -50,7 +51,7 @@ const DRAWER_TABS = [
     mlText: 1.6,
   },
   {
-    name: "Logout",
+    name: "Tabs.logout",
     tab: "logout",
     href: "/auth",
     icon: "/static/images/icons/logout_icon.png",
@@ -64,6 +65,7 @@ const drawerWidth = 200;
 
 const Drawer = React.memo(({ activeTab }: { activeTab: string }) => {
   const cabinetData = useContext(CabinetContext);
+  const scopedT = useScopedI18n("Cabinet");
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(1200));
   const userData = useContext(UserContext);
@@ -75,24 +77,29 @@ const Drawer = React.memo(({ activeTab }: { activeTab: string }) => {
   const tabComponents = useMemo(
     () =>
       DRAWER_TABS.map(
-        ({
-          name,
-          tab,
-          href,
-          icon,
-          mlIcon,
-          mlText,
-          mt = 0.5,
-          access = ["Customer", "Lawyer"],
-        }) =>
+        (
+          {
+            name,
+            tab,
+            href,
+            icon,
+            mlIcon,
+            mlText,
+            mt = 0.5,
+            access = ["Customer", "Lawyer"],
+          },
+          index
+        ) =>
           access.includes(userData.user.role) && (
             <Tab
-              key={name}
+              key={index}
               component={Link}
               href={href}
               label={
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography sx={{ ml: mlText }}>{name}</Typography>
+                  <Typography sx={{ ml: mlText }}>
+                    {scopedT(name as any)}
+                  </Typography>
                 </Box>
               }
               sx={{
@@ -122,9 +129,9 @@ const Drawer = React.memo(({ activeTab }: { activeTab: string }) => {
             />
           )
       ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [activeTab, cabinetData, userData.user.role]
   );
-  console.log(cabinetData?.openDrawer);
 
   return (
     <>

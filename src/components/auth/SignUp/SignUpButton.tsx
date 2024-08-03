@@ -7,27 +7,37 @@ import {
   isValidEmail,
   isValidPassword,
 } from "../validation";
+import { useScopedI18n } from "@/locales/client";
 
 const SignUpButton = () => {
-  const theme = useTheme();
-
   const authContext = useContext(AuthContext);
+  const scopedT = useScopedI18n("Auth.SignUp");
 
   const handleSubmit = () => {
     if (!authContext) return;
 
     const emailIsValid = isValidEmail(authContext.regFormData.email.value);
+
     const passwordIsValid = isValidPassword(
       authContext.regFormData.password.value
     );
+
+    console.log(
+      authContext.regFormData.password.value,
+      authContext.regFormData.confirmPassword.value
+    );
+
     const confirmPasswordIsValid = isValidConfirmPassword(
       authContext.regFormData.password.value,
       authContext.regFormData.confirmPassword.value
     );
+
     const nameIsValid = isNotEmptyField(authContext.regFormData.name.value);
+
     const surnameIsValid = isNotEmptyField(
       authContext.regFormData.surname.value
     );
+
     const legalIsValid = authContext.regFormData.legal.isValid;
 
     authContext.setRegFormData({
@@ -76,7 +86,7 @@ const SignUpButton = () => {
           },
         }}
       >
-        Sign up
+        {scopedT("form.button")}
       </Button>
     </Box>
   );

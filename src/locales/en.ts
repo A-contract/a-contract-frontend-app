@@ -336,5 +336,99 @@ export default {
       },
     },
   },
-  Blog: {},
+  Blog: {
+    Title: "Blog",
+    Categories: {
+      allPosts: "All Posts",
+    },
+  },
+  Auth: {
+    Title: "Auth",
+    SignIn: {
+      title: "Sign In",
+      form: {
+        email: "Email",
+        password: "Password",
+        button: "Sign in",
+        link1: "Don't remember your password?",
+        link2: "Don't have an account? Sign up",
+      },
+    },
+    SignUp: {
+      title: "Sign Up",
+      form: {
+        name: "Name",
+        surname: "Surname",
+        email: "Email",
+        password: "Password",
+        confirmPassword: "Confirm password",
+        legalCheckBox:
+          "By signing up, you agree to our terms of service and privacy policy *",
+        button: "Sign up",
+      },
+    },
+  },
+  Cabinet: {
+    Title: "Cabinet",
+    Tabs: {
+      contracts: "Contracts",
+      workspace: "Workspace",
+      support: "Support",
+      settings: "Settings",
+      logout: "Logout",
+    },
+    Contracts: {
+      analyseContracts: {
+        title1: "Analyse contract",
+        title2: "Selected contract",
+        uploadLabel: "Attach your contract",
+        button1: "Analyse contract",
+        button2: "Finish",
+      },
+      contracts: {
+        title: "Contracts",
+        table: {
+          column1: "№",
+          column2: "Contract Name",
+          column3: "Payment Status",
+          column4: "Progress Status",
+          column5: "Download",
+          button1: "To Pay",
+          button2: "To process",
+          button3: "Download",
+          footer: "Rows per page",
+        },
+      },
+    },
+    Support: {
+      Title: "Support",
+      Description: {
+        paragraph1: "How does support work?",
+        paragraph2:
+          "Please familiarize yourself with the most frequent questions, if you have not found yours, then use the feedback, the operator will answer you as soon as possible.",
+        paragraph3: "The most frequent questions",
+        paragraph4: "1. What is the A-contract service for?",
+        paragraph5:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph6: "2. What are the terms of processing contracts?",
+        paragraph7:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph8: "3. How is the payment??",
+        paragraph9:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+        paragraph10: "4. How to download the contract?",
+        paragraph11:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+      },
+    },
+    Settings: {
+      Title: "Settings",
+      section1: {
+        title: "Personal information",
+        name: "Name",
+        surname: "Surname",
+        button: "Save",
+      },
+    },
+  },
 } as const;
